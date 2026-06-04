@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, "output", "codex_monitor")
-DEFAULT_ROOTS = ["AI_交接", "3D_small"]
+DEFAULT_ROOTS = ["AI_交接", "3D_small", "mechanical_properties", "3D_far", "2D"]
 DEFAULT_EXTS = [".py", ".ipyn", ".ipynb", ".dat", ".f3dat", ".md", ".txt", ".csv", ".xlsx", ".ps1", ".png"]
 SUMMARY_LOG_EXTS = [".log"]
 EXCLUDE_DIRS = {".git", "__pycache__", ".ipynb_checkpoints", ".vscode"}
