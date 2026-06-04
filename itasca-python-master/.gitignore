@@ -1,0 +1,15 @@
+*.pyc
+build/
+dist/
+itasca.egg-info/
+*.egg-info
+bin.fish
+errorlog.dmp
+errorlog.txt
+pp_temp.fis
+pp_tempfile.dat
+testdata.fish
+MANIFEST
+venv/
+*.swp
+local_test/

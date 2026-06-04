@@ -1,0 +1,5 @@
+model new
+model title "console probe"
+program log-file "D:/FLAC_AI/3D_far/0530/far_out/00_console_probe.log"
+program echo-line "console probe ok"
+program quit

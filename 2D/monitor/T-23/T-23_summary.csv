@@ -1,0 +1,2 @@
+﻿"monitor_id","mileage","monitor_x","simulation_x","x_diff_m","arrival_step","arrival_source","reference_step","step_length_m","crown_col","wall_l_col","wall_r_col","plastic_thickness_m","analytic_crown_settlement_mm","analytic_sidewall_convergence_mm","output_png"
+"T-23","1380.0","2896.0","2900.0","4.0","12.0","STEP_-","14.0","1.5","crown_2900","wall_L_2900","wall_R_2900","1.6500000000000004","153.94171190226632","307.88342380453264","D:\FLAC_AI\2D\monitor\T-23\T-23_section_displacement.png"

@@ -1,0 +1,118 @@
+; ============================================================
+; run_initial_state_0530_nopy.f3dat
+; Pure FLAC3D version of D:/FLAC_AI/3D_far/0530/initial_state_v2.py
+; Python is avoided here so this stage can run in flac3d600_console.exe.
+;
+; Output:
+;   D:/FLAC_AI/3D_far/0530/initial_state_0530.f3sav
+;   D:/FLAC_AI/3D_far/0530/far_out/01_initial_state.log
+;   D:/FLAC_AI/3D_far/0530/far_out/initial_ratio_local.tab
+;   D:/FLAC_AI/3D_far/0530/far_out/initial_ratio_average.tab
+;   D:/FLAC_AI/3D_far/0530/far_out/initial_unbalanced_max.tab
+; ============================================================
+
+program log-file "D:/FLAC_AI/3D_far/0530/far_out/01_initial_state.log"
+
+model restore "D:/FLAC_AI/3D_far/0530/step5_tunnel_marked"
+
+; ============================================================
+; Mohr-Coulomb material parameters
+; Format: density[kg/m3], young[Pa], poisson[-], cohesion[Pa], friction[deg]
+; Source: initial_state_v2.py, current 0530 version.
+; ============================================================
+
+zone cmodel assign mohr-coulomb range group 'SS_NK' slot 'lithology'
+zone property density 2565.0 young 1.0e9 poisson 0.29 cohesion 0.20e6 friction 38 range group 'SS_NK' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'Interbedded_ST' slot 'lithology'
+zone property density 2520.0 young 0.8e9 poisson 0.32 cohesion 0.15e6 friction 35 range group 'Interbedded_ST' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'SH_ST' slot 'lithology'
+zone property density 2538.0 young 0.6e9 poisson 0.38 cohesion 0.10e6 friction 32 range group 'SH_ST' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'SS_NC' slot 'lithology'
+zone property density 2485.0 young 1.2e9 poisson 0.25 cohesion 0.25e6 friction 42 range group 'SS_NC' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'Fault' slot 'lithology'
+zone property density 2490.0 young 0.3e9 poisson 0.30 cohesion 0.02e6 friction 20 range group 'Fault' slot 'lithology'
+
+; ============================================================
+; Tunnel zones by x segment
+;   x=2500~2600: SS_NC
+;   x=2600~2850: Fault
+;   x=2850~3000: SH_ST
+; ============================================================
+
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2500 2600
+zone property density 2485.0 young 1.2e9 poisson 0.25 cohesion 0.25e6 friction 42 range group 'tunnel' position-x 2500 2600
+
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2600 2850
+zone property density 2490.0 young 0.3e9 poisson 0.30 cohesion 0.02e6 friction 20 range group 'tunnel' position-x 2600 2850
+
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2850 3000
+zone property density 2538.0 young 0.6e9 poisson 0.38 cohesion 0.10e6 friction 32 range group 'tunnel' position-x 2850 3000
+
+; ============================================================
+; Material check
+; ============================================================
+
+fish define check_material
+    local n_no_model = 0
+    local n_no_den   = 0
+    loop foreach local z zone.list
+        if zone.model(z) = 'null' then
+            continue
+        endif
+        if zone.model(z) = 'none' then
+            n_no_model = n_no_model + 1
+            continue
+        endif
+        if zone.density(z) = 0.0 then
+            n_no_den = n_no_den + 1
+        endif
+    endloop
+    io.out('zones with no model : ' + string(n_no_model))
+    io.out('zones with density=0: ' + string(n_no_den))
+end
+@check_material
+
+; ============================================================
+; Boundary conditions
+; Model range approx. X:2500~3000, Y:4700~4900, Z:170~265
+; ============================================================
+
+zone gridpoint fix velocity-x range position-x 2499 2501
+zone gridpoint fix velocity-x range position-x 2999 3001
+zone gridpoint fix velocity-y range position-y 4699 4701
+zone gridpoint fix velocity-y range position-y 4899 4901
+zone gridpoint fix velocity-z range position-z 169  171
+
+; ============================================================
+; Gravity, initial stress, histories, and elastic equilibrium
+; ============================================================
+
+model gravity 0 0 -9.81
+zone initialize-stresses ratio 1.2 1.2
+
+history interval 100
+model history name 'ratio_local' mechanical ratio-local
+model history name 'ratio_average' mechanical ratio-average
+model history name 'unbalanced_max' mechanical unbalanced-maximum
+
+model solve elastic
+
+history export 'ratio_local' table 'initial_ratio_local'
+history export 'ratio_average' table 'initial_ratio_average'
+history export 'unbalanced_max' table 'initial_unbalanced_max'
+
+table 'initial_ratio_local' export 'D:/FLAC_AI/3D_far/0530/far_out/initial_ratio_local.tab' truncate
+table 'initial_ratio_average' export 'D:/FLAC_AI/3D_far/0530/far_out/initial_ratio_average.tab' truncate
+table 'initial_unbalanced_max' export 'D:/FLAC_AI/3D_far/0530/far_out/initial_unbalanced_max.tab' truncate
+
+zone gridpoint initialize velocity (0,0,0)
+zone gridpoint initialize displacement (0,0,0)
+
+model save "D:/FLAC_AI/3D_far/0530/initial_state_0530"
+
+program echo-line "=== 01 initial_state complete ==="
+program quit

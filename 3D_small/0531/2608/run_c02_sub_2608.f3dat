@@ -1,0 +1,16 @@
+; run_c02_sub_2608.f3dat — combo C02 (軟弱：低E低強度)
+model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+[global combo_id = 'c02']
+[global y_SH = 0.5e9]
+[global p_SH = 0.40]
+[global c_SH = 70e3]
+[global f_SH = 28]
+[global y_NC = 0.6e9]
+[global p_NC = 0.28]
+[global c_NC = 150e3]
+[global f_NC = 38]
+[global y_FA = 0.18e9]
+[global p_FA = 0.32]
+[global c_FA = 20e3]
+[global f_FA = 16]
+call 'D:/FLAC_AI/3D_small/0531/2608/_reader_body_sub_2608.f3dat'

@@ -1,0 +1,6 @@
+﻿formation,D_hb,mi_min,mi_q50,mi_max,GSI_min,GSI_q50,GSI_max,source
+SS_NK,0.5,12.0,17.0,22.0,35.0,45.0,55.0,initial_engineering_assumption_user_review_required
+Interbedded_ST,0.5,7.0,9.0,12.0,30.0,38.0,45.0,initial_engineering_assumption_user_review_required
+SH_ST,0.5,4.0,6.0,8.0,25.0,33.0,40.0,initial_engineering_assumption_user_review_required
+SS_NC,0.5,12.0,17.0,22.0,40.0,48.0,55.0,initial_engineering_assumption_user_review_required
+Fault,0.5,3.0,4.0,6.0,15.0,22.0,30.0,initial_engineering_assumption_user_review_required

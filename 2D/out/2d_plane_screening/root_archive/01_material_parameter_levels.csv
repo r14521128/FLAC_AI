@@ -1,0 +1,16 @@
+﻿formation_used,parameter_level,density_kg_m3,gamma_N_m3,E,nu,c,phi,E_source,nu_source,c_source,phi_source,density_source,E_parameter_name,c_parameter_name,density_parameter_name
+Fault,min,2490.0,24426.9,5000000.0,0.3,3000.0,5.0,min,min,min,min,min,E_MPa,c_MPa,density_kg_m3
+Interbedded_ST,min,2520.0,24721.2,15000000.0,0.25,60000.0,11.7,min,min,min,min,min,E_MPa,c_MPa,density_kg_m3
+SH_ST,min,2538.0,24897.780000000002,12000000.0,0.28,10000.0,7.6,min,min,min,min,min,E_MPa,c_MPa,density_kg_m3
+Fault,Q25,2490.0,24426.9,11250000.0,0.325,19750.0,7.025,q25,q25,q25,q25,q25,E_MPa,c_MPa,density_kg_m3
+Interbedded_ST,Q25,2520.0,24721.2,70000000.0,0.2825,120000.0,17.974999999999998,q25,q25,q25,q25,q25,E_MPa,c_MPa,density_kg_m3
+SH_ST,Q25,2538.0,24897.780000000002,38000000.0,0.31,52500.0,12.375,q25,q25,q25,q25,q25,E_MPa,c_MPa,density_kg_m3
+Fault,average,2490.0,24426.9,17500000.0,0.35,36500.0,9.05,mean,mean,mean,mean,mean,E_MPa,c_MPa,density_kg_m3
+Interbedded_ST,average,2520.0,24721.2,125000000.0,0.315,180000.0,24.25,mean,mean,mean,mean,mean,E_MPa,c_MPa,density_kg_m3
+SH_ST,average,2538.0,24897.780000000002,64000000.0,0.34,95000.0,17.15,mean,mean,mean,mean,mean,E_MPa,c_MPa,density_kg_m3
+Fault,Q75,2490.0,24426.9,23750000.0,0.375,53250.00000000001,11.075,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,E_MPa,c_MPa,density_kg_m3
+Interbedded_ST,Q75,2520.0,24721.2,180000000.0,0.34750000000000003,240000.0,30.525,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,E_MPa,c_MPa,density_kg_m3
+SH_ST,Q75,2538.0,24897.780000000002,90000000.0,0.37,137500.0,21.925,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,linear_min_max_q75_estimate,E_MPa,c_MPa,density_kg_m3
+Fault,max,2490.0,24426.9,30000000.0,0.4,70000.0,13.1,max,max,max,max,max,E_MPa,c_MPa,density_kg_m3
+Interbedded_ST,max,2520.0,24721.2,235000000.0,0.38,300000.0,36.8,max,max,max,max,max,E_MPa,c_MPa,density_kg_m3
+SH_ST,max,2538.0,24897.780000000002,116000000.0,0.4,180000.0,26.7,max,max,max,max,max,E_MPa,c_MPa,density_kg_m3

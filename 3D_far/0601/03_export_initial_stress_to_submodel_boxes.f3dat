@@ -1,0 +1,81 @@
+; ============================================================
+; 03_export_initial_stress_to_submodel_boxes.f3dat  (0601)
+; 從 0601 大模型初始應力狀態，輸出兩個小模型 box 的初始應力。
+;
+; 來源狀態:
+;   D:/FLAC_AI/3D_far/0601/initial_state_0601.f3sav
+;
+; 輸出:
+;   D:/FLAC_AI/3D_far/0601/far_out/initial_stress_sub_2608.dat
+;   D:/FLAC_AI/3D_far/0601/far_out/initial_stress_sub_2896.dat
+;   格式 (空白分隔): zid x y z sxx syy szz sxy sxz syz
+;
+; 給 read_far_boundary_sub_2608.f3dat / _2896.f3dat 的 3D Bucket IDW 讀取。
+; ============================================================
+
+program log-file 'D:/FLAC_AI/3D_far/0601/far_out/03_export_initial_stress.log'
+
+model restore 'D:/FLAC_AI/3D_far/0601/initial_state_0601'
+
+; ---- export initial stress for sub_2608 (x 2558~2658) ----
+fish define export_initial_stress_sub_2608
+    local file_line = array.create(1)
+    local status = 0
+    local count  = 0
+    status = file.open('D:/FLAC_AI/3D_far/0601/far_out/initial_stress_sub_2608.dat', 1, 1)
+    file_line(1) = 'zid x y z sxx syy szz sxy sxz syz'
+    status = file.write(file_line, 1)
+    loop foreach local iz zone.list
+        if zone.pos.x(iz) >= 2558.0
+            if zone.pos.x(iz) <= 2658.0
+                if zone.pos.y(iz) >= 4775.0
+                    if zone.pos.y(iz) <= 4825.0
+                        if zone.pos.z(iz) >= 192.0
+                            if zone.pos.z(iz) <= 242.0
+                                file_line(1) = string(zone.id(iz)) + ' ' + string(zone.pos.x(iz)) + ' ' + string(zone.pos.y(iz)) + ' ' + string(zone.pos.z(iz)) + ' ' + string(zone.stress.xx(iz)) + ' ' + string(zone.stress.yy(iz)) + ' ' + string(zone.stress.zz(iz)) + ' ' + string(zone.stress.xy(iz)) + ' ' + string(zone.stress.xz(iz)) + ' ' + string(zone.stress.yz(iz))
+                                status = file.write(file_line, 1)
+                                count = count + 1
+                            endif
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endloop
+    status = file.close
+    local oo = io.out('exported initial_stress_sub_2608: ' + string(count) + ' zones')
+end
+@export_initial_stress_sub_2608
+
+; ---- export initial stress for sub_2896 (x 2846~2946) ----
+fish define export_initial_stress_sub_2896
+    local file_line = array.create(1)
+    local status = 0
+    local count  = 0
+    status = file.open('D:/FLAC_AI/3D_far/0601/far_out/initial_stress_sub_2896.dat', 1, 1)
+    file_line(1) = 'zid x y z sxx syy szz sxy sxz syz'
+    status = file.write(file_line, 1)
+    loop foreach local iz zone.list
+        if zone.pos.x(iz) >= 2846.0
+            if zone.pos.x(iz) <= 2946.0
+                if zone.pos.y(iz) >= 4775.0
+                    if zone.pos.y(iz) <= 4825.0
+                        if zone.pos.z(iz) >= 192.0
+                            if zone.pos.z(iz) <= 242.0
+                                file_line(1) = string(zone.id(iz)) + ' ' + string(zone.pos.x(iz)) + ' ' + string(zone.pos.y(iz)) + ' ' + string(zone.pos.z(iz)) + ' ' + string(zone.stress.xx(iz)) + ' ' + string(zone.stress.yy(iz)) + ' ' + string(zone.stress.zz(iz)) + ' ' + string(zone.stress.xy(iz)) + ' ' + string(zone.stress.xz(iz)) + ' ' + string(zone.stress.yz(iz))
+                                status = file.write(file_line, 1)
+                                count = count + 1
+                            endif
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endloop
+    status = file.close
+    local oo = io.out('exported initial_stress_sub_2896: ' + string(count) + ' zones')
+end
+@export_initial_stress_sub_2896
+
+program echo-line '=== 0601 export initial stress complete ==='
+program quit

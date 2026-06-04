@@ -33,3 +33,6 @@ scripts/mail_config.json
 data/calibration.db
 flac3d/params.json
 flac3d/simulation_done.flag
+
+# GitHub hard limit: keep oversized generated CSVs local.
+3D_far/0601/far_out/submodel_boundary_displacement_v4.csv

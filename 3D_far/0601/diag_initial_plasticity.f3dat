@@ -1,0 +1,62 @@
+; 診斷：initial_state_0601 開挖前的 in-situ 降伏狀況（依岩性群組）
+model new
+program log-file 'D:/FLAC_AI/3D_far/0601/diag_initial_plasticity.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0601/initial_state_0601'
+
+fish define diag_plastic
+    local pb = 1023
+    local t_nk = 0
+    local y_nk = 0
+    local t_int = 0
+    local y_int = 0
+    local t_sh = 0
+    local y_sh = 0
+    local t_nc = 0
+    local y_nc = 0
+    local t_fa = 0
+    local y_fa = 0
+    local t_all = 0
+    local y_all = 0
+    loop foreach local z zone.list
+        if zone.model(z) = 'null'
+            continue
+        endif
+        t_all = t_all + 1
+        local yld = 0
+        if math.and(zone.state(z,1), pb) # 0
+            yld = 1
+            y_all = y_all + 1
+        endif
+        local g = zone.group(z,'lithology')
+        if g = 'SS_NK'
+            t_nk = t_nk + 1
+            y_nk = y_nk + yld
+        endif
+        if g = 'Interbedded_ST'
+            t_int = t_int + 1
+            y_int = y_int + yld
+        endif
+        if g = 'SH_ST'
+            t_sh = t_sh + 1
+            y_sh = y_sh + yld
+        endif
+        if g = 'SS_NC'
+            t_nc = t_nc + 1
+            y_nc = y_nc + yld
+        endif
+        if g = 'Fault'
+            t_fa = t_fa + 1
+            y_fa = y_fa + yld
+        endif
+    endloop
+    io.out('DIAG_ALL yielded ' + string(y_all) + ' / ' + string(t_all))
+    io.out('DIAG_SS_NK yielded ' + string(y_nk) + ' / ' + string(t_nk))
+    io.out('DIAG_Interbedded_ST yielded ' + string(y_int) + ' / ' + string(t_int))
+    io.out('DIAG_SH_ST yielded ' + string(y_sh) + ' / ' + string(t_sh))
+    io.out('DIAG_SS_NC yielded ' + string(y_nc) + ' / ' + string(t_nc))
+    io.out('DIAG_Fault yielded ' + string(y_fa) + ' / ' + string(t_fa))
+end
+@diag_plastic
+program echo-line 'DIAG done'
+program quit

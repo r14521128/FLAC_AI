@@ -1,0 +1,16 @@
+; ============================================================
+; 02_unsupported_submodel_boundary_monitor_smoke.f3dat
+; Wrapper for a short automation smoke test of:
+;   06_unsupported_submodel_boundary_monitor.py
+;
+; Environment variables are set by run_0530_smoke_test.ps1:
+;   FLAC_SMOKE_MAX_STEP_PAIR
+;   FLAC_SMOKE_SOLVE_CAP
+; ============================================================
+
+program log-file "D:/FLAC_AI/3D_far/0530/far_out/02_unsupported_smoke.log"
+
+program python-file "D:/FLAC_AI/3D_far/0530/06_unsupported_submodel_boundary_monitor.py"
+
+program echo-line "=== 02 unsupported smoke complete ==="
+program quit

@@ -1,0 +1,56 @@
+; ===========================================================
+; skel_excav_liner.f3dat  最小骨架
+; 挖3段 + 上2段 liner（落後1步）+ 存檔
+; 測試用：restore 0601 initial_state（幾何同 0603，驗證機制）
+;   stage1 挖 2640-2642
+;   stage2 挖 2642-2644，上 stage1(2640-2642) liner
+;   stage3 挖 2644-2646，上 stage2(2642-2644) liner
+; liner(鋼纖維噴凝土)：isotropic=(23.5GPa,0.2) thickness=0.2 density=2400 結合/剛性界面
+; ===========================================================
+model new
+program log-file 'D:/FLAC_AI/3D_far/0603/skel_excav_liner.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0601/initial_state_0601'
+zone gridpoint initialize displacement (0,0,0)
+zone gridpoint initialize velocity (0,0,0)
+
+; ===========================================================
+; Stage 1: 挖 2640-2642
+; ===========================================================
+zone group 'excavation' range group 'tunnel' position-x 2640 2642
+zone cmodel assign null range group 'excavation'
+model cycle 2000
+program echo-line '=== stage1 excavated, cycled ==='
+
+; ===========================================================
+; Stage 2: 挖 2642-2644，上 stage1 liner
+; ===========================================================
+zone group 'excavation' range group 'tunnel' position-x 2642 2644
+zone cmodel assign null range group 'excavation'
+struct liner create by-face id=1 range group 'excavation' not group 'tunnel' position-x 2640 2642
+struct liner property isotropic=(23.5e9, 0.2) thickness=0.2 density=2400
+struct liner property coupling-stiffness-normal=1e10 coupling-stiffness-shear=1e10 coupling-cohesion-shear=1e20
+model cycle 2000
+program echo-line '=== stage2 excavated + liner on seg1 ==='
+
+; ===========================================================
+; Stage 3: 挖 2644-2646，上 stage2 liner
+; ===========================================================
+zone group 'excavation' range group 'tunnel' position-x 2644 2646
+zone cmodel assign null range group 'excavation'
+struct liner create by-face id=2 range group 'excavation' not group 'tunnel' position-x 2642 2644
+struct liner property isotropic=(23.5e9, 0.2) thickness=0.2 density=2400
+struct liner property coupling-stiffness-normal=1e10 coupling-stiffness-shear=1e10 coupling-cohesion-shear=1e20
+model cycle 2000
+program echo-line '=== stage3 excavated + liner on seg2 ==='
+
+; ---- 報告 ----
+fish define report
+    local gc = gp.near(2642.0, 4800.0, 220.0)
+    io.out('SKEL crown disp near seg @(2642,4800,220) z = ' + string(gp.disp.z(gc)))
+end
+@report
+
+model save 'D:/FLAC_AI/3D_far/0603/skel_test'
+program echo-line '=== SKELETON DONE ==='
+program quit

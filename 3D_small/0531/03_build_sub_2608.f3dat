@@ -1,0 +1,21 @@
+; ===========================================================
+; 03_build_sub_2608.f3dat
+; 小模型 sub_2608
+;
+; X: 2558~2658, 1 m/grid, 100 zones in X
+; Y: 4775~4825, 分段加密
+; Z: 192~242, 分段加密
+;
+; 本檔只建立小模型、套地質、標 tunnel。
+; 邊界位移與應力狀態等大模型跑完後再讀取。
+; ===========================================================
+
+model new
+model title 'sub_2608 unsupported excavation submodel mesh'
+
+[sub_xmin = 2558.0]
+[sub_xmax = 2658.0]
+
+call 'D:/FLAC_AI/3D_far/0601/03_build_submodel_common.f3dat' suppress
+
+model save 'D:/FLAC_AI/3D_far/0601/sub_2608_build'

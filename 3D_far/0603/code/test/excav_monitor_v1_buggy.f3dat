@@ -1,0 +1,219 @@
+; ===========================================================
+; excav_smoke.f3dat  — 核心迴圈 smoke 測試（在 0601 上除錯）
+; 位置式分段開挖 + 分段 liner(落後1步) + solve + 寫 CSV
+; 跑 SMOKE_CAP 步就停。除錯通後擴成完整版 excav_monitor.f3dat
+; ===========================================================
+model new
+program log-file 'D:/FLAC_AI/3D_far/0603/excav_monitor.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0603/initial_state_0603'
+zone gridpoint initialize displacement (0,0,0)
+zone gridpoint initialize velocity (0,0,0)
+
+[global FINE_HALF   = 36.0]
+[global DX_FINE     = 2.0]
+[global DX_COARSE   = 10.0]
+[global L_STOP      = 2780.0]
+[global R_STOP      = 2780.0]
+[global RATIO_FINE  = 1.0e-5]
+[global RATIO_COARSE= 1.0e-4]
+[global SCHUNK      = 500]
+[global SOLVE_CAP   = 20000]
+[global MIN_CYCLES  = 2000]
+[global MON1        = 2608.0]
+[global MON2        = 2896.0]
+[global SMOKE_CAP   = 0]
+[global csv_path    = 'D:/FLAC_AI/3D_far/0603/out/excav_monitor.csv']
+
+; ---- 隧道 x 範圍 ----
+[global TX_MIN = 1e30]
+[global TX_MAX = -1e30]
+fish define find_tunnel_range
+    loop foreach local z zone.list
+        if zone.group(z,'default') = 'tunnel'
+            local xx = zone.pos.x(z)
+            if xx < TX_MIN
+                TX_MIN = xx
+            endif
+            if xx > TX_MAX
+                TX_MAX = xx
+            endif
+        endif
+    endloop
+    io.out('tunnel x range: ' + string(TX_MIN) + ' ~ ' + string(TX_MAX))
+end
+@find_tunnel_range
+
+; ---- 監測 gridpoint ----
+[global gC1 = gp.near(MON1, 4800.0, 220.0)]
+[global gL1 = gp.near(MON1, 4797.0, 217.0)]
+[global gR1 = gp.near(MON1, 4803.0, 217.0)]
+[global gC2 = gp.near(MON2, 4800.0, 220.0)]
+[global gL2 = gp.near(MON2, 4797.0, 217.0)]
+[global gR2 = gp.near(MON2, 4803.0, 217.0)]
+
+fish define is_fine(xx)
+    is_fine = 0
+    if math.abs(xx - MON1) <= FINE_HALF
+        is_fine = 1
+    endif
+    if math.abs(xx - MON2) <= FINE_HALF
+        is_fine = 1
+    endif
+end
+
+; ---- liner 參數施作（直接命令，不包 fish）----
+fish define make_liner(xa, xb)
+    command
+        zone group 'linenow' range group 'excavation' position-x [xa] [xb]
+        struct liner create by-face range group 'linenow' not group 'tunnel' not group 'excavation'
+        struct liner property isotropic=(23.5e9, 0.2) thickness=0.2 density=2400
+        struct liner property coupling-stiffness-normal=1e10 coupling-stiffness-shear=1e10 coupling-cohesion-shear=1e20
+        zone group 'excavation' range group 'linenow'
+    endcommand
+end
+
+fish define excavate(xa, xb)
+    command
+        zone group 'excavation' range group 'tunnel' position-x [xa] [xb]
+        zone cmodel assign null range group 'excavation'
+    endcommand
+end
+
+fish define solve_step(rtarget)
+    local total = 0
+    solve_step = 0
+    loop while total < SOLVE_CAP
+        command
+            model cycle [SCHUNK]
+        endcommand
+        total = total + SCHUNK
+        if total >= MIN_CYCLES
+            if zone.mech.ratio <= rtarget
+                solve_step = total
+                exit
+            endif
+        endif
+    endloop
+    if solve_step = 0
+        solve_step = total
+    endif
+end
+
+; ---- CSV ----
+[global fout = file.open(csv_path, 1, 1)]
+fish define write_header
+    local a = array.create(1)
+    a(1) = 'step,Lxa,Lxb,Rxa,Rxb,fine,cycle,ratio_avg,crown2608_z,conv2608,crown2896_z,conv2896,n_lined'
+    local st = file.write(a, 1)
+end
+@write_header
+
+fish define write_row(stp, lxa, lxb, rxa, rxb, fine, cyc, nlined)
+    local a = array.create(1)
+    local c1 = gp.disp.z(gC1)
+    local v1 = -gp.disp.y(gL1) + gp.disp.y(gR1)
+    local c2 = gp.disp.z(gC2)
+    local v2 = -gp.disp.y(gL2) + gp.disp.y(gR2)
+    a(1) = string(stp) + ',' + string(lxa) + ',' + string(lxb) + ',' + string(rxa) + ',' + string(rxb) + ',' + string(fine) + ',' + string(cyc) + ',' + string(zone.mech.ratio) + ',' + string(c1) + ',' + string(v1) + ',' + string(c2) + ',' + string(v2) + ',' + string(nlined)
+    local st = file.write(a, 1)
+end
+
+; ===========================================================
+; 主迴圈：左右位置式推進 + 分段 liner(落後1步)
+; ===========================================================
+fish define main_excav
+    local xL = TX_MIN
+    local xR = TX_MAX
+    local L_done = 0
+    local R_done = 0
+    local pLa = 0.0
+    local pLb = 0.0
+    local pRa = 0.0
+    local pRb = 0.0
+    local have_prev = 0
+    local nlined = 0
+    local stp = 0
+    local both_done = 0
+    loop while both_done = 0
+        stp = stp + 1
+        local fine = 0
+        ; --- 左側挖一段 ---
+        local cLa = 0.0
+        local cLb = 0.0
+        local hasL = 0
+        if L_done = 0
+            local wL = DX_COARSE
+            if is_fine(xL) = 1
+                wL = DX_FINE
+                fine = 1
+            endif
+            cLa = xL
+            cLb = xL + wL
+            excavate(cLa - 0.5, cLb - 0.5)
+            hasL = 1
+            xL = xL + wL
+            if cLb >= L_STOP
+                L_done = 1
+            endif
+        endif
+        ; --- 右側挖一段 ---
+        local cRa = 0.0
+        local cRb = 0.0
+        local hasR = 0
+        if R_done = 0
+            local wR = DX_COARSE
+            if is_fine(xR) = 1
+                wR = DX_FINE
+                fine = 1
+            endif
+            cRa = xR - wR
+            cRb = xR
+            excavate(cRa + 0.5, cRb + 0.5)
+            hasR = 1
+            xR = xR - wR
+            if cRa <= R_STOP
+                R_done = 1
+            endif
+        endif
+        ; --- 上前一步的 liner ---
+        if have_prev = 1
+            make_liner(pLa - 0.5, pLb - 0.5)
+            nlined = nlined + 1
+            make_liner(pRa + 0.5, pRb + 0.5)
+            nlined = nlined + 1
+        endif
+        ; --- solve ---
+        local rt = RATIO_COARSE
+        if fine = 1
+            rt = RATIO_FINE
+        endif
+        local used = solve_step(rt)
+        ; --- 記錄 ---
+        write_row(stp, cLa, cLb, cRa, cRb, fine, used, nlined)
+        io.out('step ' + string(stp) + ' L=' + string(cLa) + '-' + string(cLb) + ' R=' + string(cRa) + '-' + string(cRb) + ' cyc=' + string(used) + ' ratio=' + string(zone.mech.ratio))
+        ; 存這步當前段給下一步上 liner
+        pLa = cLa
+        pLb = cLb
+        pRa = cRa
+        pRb = cRb
+        have_prev = 1
+        if L_done = 1
+            if R_done = 1
+                both_done = 1
+            endif
+        endif
+        if SMOKE_CAP > 0
+            if stp >= SMOKE_CAP
+                exit
+            endif
+        endif
+    endloop
+    io.out('MAIN_EXCAV done, steps=' + string(stp))
+end
+@main_excav
+
+[file.close]
+model save 'D:/FLAC_AI/3D_far/0603/out/excav_monitor_final'
+program echo-line '=== EXCAV_MONITOR DONE ==='
+program quit

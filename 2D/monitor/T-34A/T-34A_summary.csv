@@ -1,0 +1,2 @@
+﻿"monitor_id","mileage","monitor_x","simulation_x","x_diff_m","arrival_step","arrival_source","reference_step","step_length_m","crown_col","wall_l_col","wall_r_col","plastic_thickness_m","analytic_crown_settlement_mm","analytic_sidewall_convergence_mm","output_png"
+"T-34A","1669.0","2615.0","2600.0","-15.0","14.0","STEP_+","16.0","1.5","crown_2600","wall_L_2600","wall_R_2600","2.7300000000000004","272.7891924015533","545.5783848031066","D:\FLAC_AI\2D\monitor\T-34A\T-34A_section_displacement.png"

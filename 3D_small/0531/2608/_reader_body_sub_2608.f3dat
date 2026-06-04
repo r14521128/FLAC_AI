@@ -1,0 +1,557 @@
+; ============================================================
+; _reader_body_sub_2608.f3dat   (材料參數掃描共用本體)
+;
+; 由 run_cNN_sub_2608.f3dat 進入：進入前必須已
+;   (1) model restore 'sub_2608_build'
+;   (2) 設好 12 個材料變數 + combo_id：
+;       combo_id
+;       y_SH p_SH c_SH f_SH      (SH_ST: young poisson cohesion friction)
+;       y_NC p_NC c_NC f_NC      (SS_NC)
+;       y_FA p_FA c_FA f_FA      (Fault)
+;
+; 本體做：賦材料(SS_NK/Interbedded 固定; SH/NC/Fault 吃變數) +
+;         讀大模型應力 IDW + 切割邊界位移 + 固定六面 + 存
+;         sub_2608_initial_state_<combo_id>
+;
+; 與 read_far_boundary_sub_2608.f3dat 邏輯相同，差別只在材料來自變數。
+; ============================================================
+
+; ---- box 與檔案參數（所有 combo 相同）----
+[global box_tag   = 'sub_2608']
+[global box_xmin  = 2558.0]
+[global box_xmax  = 2658.0]
+[global box_ymin  = 4775.0]
+[global box_ymax  = 4825.0]
+[global box_zmin  = 192.0]
+[global box_zmax  = 242.0]
+[global face_tol  = 0.05]
+[global stress_file = 'D:/FLAC_AI/3D_far/0601/far_out/initial_stress_sub_2608.dat']
+[global disp_file   = 'D:/FLAC_AI/3D_far/0601/far_out/submodel_boundary_displacement_v4.csv']
+
+; ============================================================
+; 賦 Mohr-Coulomb 材料
+;   SS_NK / Interbedded_ST：固定（不掃描）
+;   SH_ST / SS_NC / Fault ：young/poisson/cohesion/friction 吃變數
+;   density 一律固定（不掃描）
+; ============================================================
+zone cmodel assign mohr-coulomb range group 'SS_NK' slot 'lithology'
+zone property density 2565.0 young 1.2e9 poisson 0.29 cohesion 300e3 friction 38 range group 'SS_NK' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'Interbedded_ST' slot 'lithology'
+zone property density 2520.0 young 0.6e9 poisson 0.32 cohesion 75e3 friction 35 range group 'Interbedded_ST' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'SH_ST' slot 'lithology'
+zone property density 2538.0 young [y_SH] poisson [p_SH] cohesion [c_SH] friction [f_SH] range group 'SH_ST' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'SS_NC' slot 'lithology'
+zone property density 2485.0 young [y_NC] poisson [p_NC] cohesion [c_NC] friction [f_NC] range group 'SS_NC' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'Fault' slot 'lithology'
+zone property density 2490.0 young [y_FA] poisson [p_FA] cohesion [c_FA] friction [f_FA] range group 'Fault' slot 'lithology'
+
+; tunnel 依 x 分段（box 2558~2658 內：2558~2600 SS_NC, 2600~2658 Fault）
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2558 2600
+zone property density 2485.0 young [y_NC] poisson [p_NC] cohesion [c_NC] friction [f_NC] range group 'tunnel' position-x 2558 2600
+
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2600 2658
+zone property density 2490.0 young [y_FA] poisson [p_FA] cohesion [c_FA] friction [f_FA] range group 'tunnel' position-x 2600 2658
+
+model gravity 0 0 -9.81
+
+; ============================================================
+; 讀入大模型應力 (空白分隔: zid x y z sxx syy szz sxy sxz syz)
+; ============================================================
+[global zdata_n = 0]
+
+fish define ReadStress
+    local fl = array.create(1)
+    local st = file.open(stress_file, 0, 1)
+    if st # 0 then
+        io.out('[WARN] cannot open stress file: ' + stress_file)
+        zdata_n = 0
+        exit
+    endif
+    st = file.read(fl, 1)
+    st = file.read(fl, 1)
+    loop while st = 0
+        zdata_n = zdata_n + 1
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+    io.out('stress data rows: ' + string(zdata_n))
+
+    global xdat   = array.create(zdata_n)
+    global ydat   = array.create(zdata_n)
+    global zdat   = array.create(zdata_n)
+    global sxxdat = array.create(zdata_n)
+    global syydat = array.create(zdata_n)
+    global szzdat = array.create(zdata_n)
+    global sxydat = array.create(zdata_n)
+    global sxzdat = array.create(zdata_n)
+    global syzdat = array.create(zdata_n)
+
+    st = file.open(stress_file, 0, 1)
+    st = file.read(fl, 1)
+    local i = 0
+    st = file.read(fl, 1)
+    loop while st = 0
+        i = i + 1
+        local ln = fl(1)
+        xdat(i)   = float(string.token(ln, 2))
+        ydat(i)   = float(string.token(ln, 3))
+        zdat(i)   = float(string.token(ln, 4))
+        sxxdat(i) = float(string.token(ln, 5))
+        syydat(i) = float(string.token(ln, 6))
+        szzdat(i) = float(string.token(ln, 7))
+        sxydat(i) = float(string.token(ln, 8))
+        sxzdat(i) = float(string.token(ln, 9))
+        syzdat(i) = float(string.token(ln, 10))
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+    io.out('stress data loaded: ' + string(i) + ' rows')
+end
+@ReadStress
+
+; ============================================================
+; 3D Bucket 設定（涵蓋 sub_2608 box，含 buffer）
+; ============================================================
+[global bucket_size = 6.0]
+[global inv_bucket_size = 1.0 / bucket_size]
+[global bucket_x0 = 2550.0]
+[global bucket_y0 = 4770.0]
+[global bucket_z0 = 188.0]
+[global bucket_nx = 20]
+[global bucket_ny = 12]
+[global bucket_nz = 11]
+[global bucket_total = bucket_nx * bucket_ny * bucket_nz]
+
+fish define BucketID
+    BucketID = (bx_id_x - 1) * bucket_ny * bucket_nz + (bx_id_y - 1) * bucket_nz + bx_id_z
+end
+fish define GetBucketX
+    GetBucketX = int((gb_x - bucket_x0) * inv_bucket_size) + 1
+end
+fish define GetBucketY
+    GetBucketY = int((gb_y - bucket_y0) * inv_bucket_size) + 1
+end
+fish define GetBucketZ
+    GetBucketZ = int((gb_z - bucket_z0) * inv_bucket_size) + 1
+end
+fish define ClampBucketX
+    if cb_x < 1 then
+        ClampBucketX = 1
+        exit
+    endif
+    if cb_x > bucket_nx then
+        ClampBucketX = bucket_nx
+        exit
+    endif
+    ClampBucketX = cb_x
+end
+fish define ClampBucketY
+    if cb_y < 1 then
+        ClampBucketY = 1
+        exit
+    endif
+    if cb_y > bucket_ny then
+        ClampBucketY = bucket_ny
+        exit
+    endif
+    ClampBucketY = cb_y
+end
+fish define ClampBucketZ
+    if cb_z < 1 then
+        ClampBucketZ = 1
+        exit
+    endif
+    if cb_z > bucket_nz then
+        ClampBucketZ = bucket_nz
+        exit
+    endif
+    ClampBucketZ = cb_z
+end
+
+fish define BuildStressBuckets
+    if zdata_n = 0 then
+        exit
+    endif
+    global b_head = array.create(bucket_total)
+    global b_next = array.create(zdata_n)
+    loop local ib0 (1, bucket_total)
+        b_head(ib0) = 0
+    endloop
+    loop local ip0 (1, zdata_n)
+        global gb_x = xdat(ip0)
+        global gb_y = ydat(ip0)
+        global gb_z = zdat(ip0)
+        local bx0 = GetBucketX
+        local by0 = GetBucketY
+        local bz0 = GetBucketZ
+        global cb_x = bx0
+        global cb_y = by0
+        global cb_z = bz0
+        bx0 = ClampBucketX
+        by0 = ClampBucketY
+        bz0 = ClampBucketZ
+        global bx_id_x = bx0
+        global bx_id_y = by0
+        global bx_id_z = bz0
+        local bid0 = BucketID
+        b_next(ip0) = b_head(bid0)
+        b_head(bid0) = ip0
+    endloop
+    io.out('stress buckets built: ' + string(bucket_total) + ' buckets')
+end
+@BuildStressBuckets
+
+; ============================================================
+; FAST 3D Bucket IDW：把大模型應力插到每個 zone
+; ============================================================
+fish define MapStress_IDW
+    if zdata_n = 0 then
+        io.out('[WARN] no stress data; skip stress IDW')
+        exit
+    endif
+    local sr = 6.0
+    local sr2 = sr * sr
+    local mapped = 0
+    local fallback = 0
+    loop foreach local zp zone.list
+        local zx = zone.pos.x(zp)
+        local zy = zone.pos.y(zp)
+        local zz = zone.pos.z(zp)
+        global gb_x = zx
+        global gb_y = zy
+        global gb_z = zz
+        local bcx = GetBucketX
+        local bcy = GetBucketY
+        local bcz = GetBucketZ
+        global cb_x = bcx
+        global cb_y = bcy
+        global cb_z = bcz
+        bcx = ClampBucketX
+        bcy = ClampBucketY
+        bcz = ClampBucketZ
+        local sum_w   = 0.0
+        local sum_sxx = 0.0
+        local sum_syy = 0.0
+        local sum_szz = 0.0
+        local sum_sxy = 0.0
+        local sum_sxz = 0.0
+        local sum_syz = 0.0
+        local dmin_local = 1.0e30
+        local i_near_local = 1
+        loop local ox0 (-1, 1)
+            loop local oy0 (-1, 1)
+                loop local oz0 (-1, 1)
+                    local nbx = bcx + ox0
+                    local nby = bcy + oy0
+                    local nbz = bcz + oz0
+                    if nbx < 1 then
+                        continue
+                    endif
+                    if nby < 1 then
+                        continue
+                    endif
+                    if nbz < 1 then
+                        continue
+                    endif
+                    if nbx > bucket_nx then
+                        continue
+                    endif
+                    if nby > bucket_ny then
+                        continue
+                    endif
+                    if nbz > bucket_nz then
+                        continue
+                    endif
+                    global bx_id_x = nbx
+                    global bx_id_y = nby
+                    global bx_id_z = nbz
+                    local bid1 = BucketID
+                    local p1 = b_head(bid1)
+                    loop while p1 > 0
+                        local dx1 = zx - xdat(p1)
+                        if dx1 < 0.0 then
+                            dx1 = -dx1
+                        endif
+                        local dy1 = zy - ydat(p1)
+                        if dy1 < 0.0 then
+                            dy1 = -dy1
+                        endif
+                        local dz1 = zz - zdat(p1)
+                        if dz1 < 0.0 then
+                            dz1 = -dz1
+                        endif
+                        local d2_1 = dx1 * dx1 + dy1 * dy1 + dz1 * dz1
+                        if d2_1 < dmin_local then
+                            dmin_local = d2_1
+                            i_near_local = p1
+                        endif
+                        if dx1 > sr then
+                            p1 = b_next(p1)
+                            continue
+                        endif
+                        if dy1 > sr then
+                            p1 = b_next(p1)
+                            continue
+                        endif
+                        if dz1 > sr then
+                            p1 = b_next(p1)
+                            continue
+                        endif
+                        if d2_1 > sr2 then
+                            p1 = b_next(p1)
+                            continue
+                        endif
+                        if d2_1 < 1.0e-10 then
+                            d2_1 = 1.0e-10
+                        endif
+                        local w1 = 1.0 / d2_1
+                        sum_w   = sum_w   + w1
+                        sum_sxx = sum_sxx + sxxdat(p1) * w1
+                        sum_syy = sum_syy + syydat(p1) * w1
+                        sum_szz = sum_szz + szzdat(p1) * w1
+                        sum_sxy = sum_sxy + sxydat(p1) * w1
+                        sum_sxz = sum_sxz + sxzdat(p1) * w1
+                        sum_syz = sum_syz + syzdat(p1) * w1
+                        p1 = b_next(p1)
+                    endloop
+                endloop
+            endloop
+        endloop
+        if sum_w > 0.0 then
+            zone.stress.xx(zp) = sum_sxx / sum_w
+            zone.stress.yy(zp) = sum_syy / sum_w
+            zone.stress.zz(zp) = sum_szz / sum_w
+            zone.stress.xy(zp) = sum_sxy / sum_w
+            zone.stress.xz(zp) = sum_sxz / sum_w
+            zone.stress.yz(zp) = sum_syz / sum_w
+            mapped = mapped + 1
+        else
+            local dmin_global = 1.0e30
+            local i_near_global = i_near_local
+            loop local ig0 (1, zdata_n)
+                local dxg = zx - xdat(ig0)
+                if dxg < 0.0 then
+                    dxg = -dxg
+                endif
+                local dyg = zy - ydat(ig0)
+                if dyg < 0.0 then
+                    dyg = -dyg
+                endif
+                local dzg = zz - zdat(ig0)
+                if dzg < 0.0 then
+                    dzg = -dzg
+                endif
+                local d2g = dxg * dxg + dyg * dyg + dzg * dzg
+                if d2g < dmin_global then
+                    dmin_global = d2g
+                    i_near_global = ig0
+                endif
+            endloop
+            zone.stress.xx(zp) = sxxdat(i_near_global)
+            zone.stress.yy(zp) = syydat(i_near_global)
+            zone.stress.zz(zp) = szzdat(i_near_global)
+            zone.stress.xy(zp) = sxydat(i_near_global)
+            zone.stress.xz(zp) = sxzdat(i_near_global)
+            zone.stress.yz(zp) = syzdat(i_near_global)
+            fallback = fallback + 1
+        endif
+    endloop
+    io.out('STRESS IDW mapped: ' + string(mapped) + '  fallback: ' + string(fallback))
+end
+@MapStress_IDW
+
+; ============================================================
+; 讀大模型六面邊界位移 CSV（逗號分隔，時間序列）
+; 取「該 box 最終收斂狀態」= 最大 step_pair(mp) 內最大 cycle(mc) 的列。
+; ============================================================
+[global ndisp = 0]
+
+fish define ReadBoundaryDisp
+    local fl = array.create(1)
+    local st = file.open(disp_file, 0, 1)
+    if st # 0 then
+        io.out('[WARN] cannot open disp file: ' + disp_file)
+        ndisp = 0
+        exit
+    endif
+    st = file.read(fl, 1)
+    local mp = -1.0
+    local mc = -1.0
+    st = file.read(fl, 1)
+    loop while st = 0
+        local ln = fl(1)
+        if string.token(ln, 11) = box_tag then
+            local sp = float(string.token(ln, 1))
+            local cy = float(string.token(ln, 3))
+            if sp > mp then
+                mp = sp
+                mc = cy
+            else
+                if sp = mp then
+                    if cy > mc then
+                        mc = cy
+                    endif
+                endif
+            endif
+        endif
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+
+    st = file.open(disp_file, 0, 1)
+    st = file.read(fl, 1)
+    local cnt = 0
+    st = file.read(fl, 1)
+    loop while st = 0
+        local ln2 = fl(1)
+        if string.token(ln2, 11) = box_tag then
+            if float(string.token(ln2, 1)) = mp then
+                if float(string.token(ln2, 3)) = mc then
+                    cnt = cnt + 1
+                endif
+            endif
+        endif
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+    ndisp = cnt
+    if cnt = 0 then
+        io.out('[WARN] no boundary disp rows for ' + box_tag)
+        exit
+    endif
+    global dxdat  = array.create(cnt)
+    global dydat  = array.create(cnt)
+    global dzdat  = array.create(cnt)
+    global duxdat = array.create(cnt)
+    global duydat = array.create(cnt)
+    global duzdat = array.create(cnt)
+
+    st = file.open(disp_file, 0, 1)
+    st = file.read(fl, 1)
+    local i = 0
+    st = file.read(fl, 1)
+    loop while st = 0
+        local ln3 = fl(1)
+        if string.token(ln3, 11) = box_tag then
+            if float(string.token(ln3, 1)) = mp then
+                if float(string.token(ln3, 3)) = mc then
+                    i = i + 1
+                    dxdat(i)  = float(string.token(ln3, 17))
+                    dydat(i)  = float(string.token(ln3, 18))
+                    dzdat(i)  = float(string.token(ln3, 19))
+                    duxdat(i) = float(string.token(ln3, 20))
+                    duydat(i) = float(string.token(ln3, 21))
+                    duzdat(i) = float(string.token(ln3, 22))
+                endif
+            endif
+        endif
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+    io.out('boundary disp loaded for ' + box_tag + ': ' + string(i) + ' rows (mp=' + string(mp) + ' mc=' + string(mc) + ')')
+end
+@ReadBoundaryDisp
+
+fish define MapDispToBoundary
+    if ndisp = 0 then
+        io.out('[WARN] no boundary disp data; skip displacement mapping')
+        exit
+    endif
+    local sr = 4.0
+    local sr2 = sr * sr
+    local nset = 0
+    loop foreach local g gp.list
+        local gx = gp.pos.x(g)
+        local gy = gp.pos.y(g)
+        local gz = gp.pos.z(g)
+        local onface = 0
+        if math.abs(gx - box_xmin) <= face_tol then
+            onface = 1
+        endif
+        if math.abs(gx - box_xmax) <= face_tol then
+            onface = 1
+        endif
+        if math.abs(gy - box_ymin) <= face_tol then
+            onface = 1
+        endif
+        if math.abs(gy - box_ymax) <= face_tol then
+            onface = 1
+        endif
+        if math.abs(gz - box_zmin) <= face_tol then
+            onface = 1
+        endif
+        if math.abs(gz - box_zmax) <= face_tol then
+            onface = 1
+        endif
+        if onface = 1 then
+            local sw = 0.0
+            local sux = 0.0
+            local suy = 0.0
+            local suz = 0.0
+            local dmin = 1.0e30
+            local inear = 1
+            loop local p (1, ndisp)
+                local ddx = gx - dxdat(p)
+                local ddy = gy - dydat(p)
+                local ddz = gz - dzdat(p)
+                local d2 = ddx * ddx + ddy * ddy + ddz * ddz
+                if d2 < dmin then
+                    dmin = d2
+                    inear = p
+                endif
+                if d2 <= sr2 then
+                    if d2 < 1.0e-10 then
+                        d2 = 1.0e-10
+                    endif
+                    local w = 1.0 / d2
+                    sw  = sw  + w
+                    sux = sux + duxdat(p) * w
+                    suy = suy + duydat(p) * w
+                    suz = suz + duzdat(p) * w
+                endif
+            endloop
+            local ux = 0.0
+            local uy = 0.0
+            local uz = 0.0
+            if sw > 0.0 then
+                ux = sux / sw
+                uy = suy / sw
+                uz = suz / sw
+            else
+                ux = duxdat(inear)
+                uy = duydat(inear)
+                uz = duzdat(inear)
+            endif
+            gp.disp.x(g) = ux
+            gp.disp.y(g) = uy
+            gp.disp.z(g) = uz
+            gp.extra(g, 1) = ux
+            gp.extra(g, 2) = uy
+            gp.extra(g, 3) = uz
+            nset = nset + 1
+        endif
+    endloop
+    io.out('boundary gp displacement set: ' + string(nset))
+end
+@MapDispToBoundary
+
+; ============================================================
+; 固定六面邊界 (hold) = 切割邊界
+; ============================================================
+zone gridpoint fix velocity range position-x 2557.95 2558.05
+zone gridpoint fix velocity range position-x 2657.95 2658.05
+zone gridpoint fix velocity range position-y 4774.95 4775.05
+zone gridpoint fix velocity range position-y 4824.95 4825.05
+zone gridpoint fix velocity range position-z 191.95  192.05
+zone gridpoint fix velocity range position-z 241.95  242.05
+
+; ============================================================
+; 存檔（檔名帶 combo_id）
+; ============================================================
+model save ['D:/FLAC_AI/3D_small/0531/2608/sub_2608_initial_state_' + combo_id]
+program echo-line ['=== reader body done: sub_2608_initial_state_' + combo_id + ' ===']
+program quit

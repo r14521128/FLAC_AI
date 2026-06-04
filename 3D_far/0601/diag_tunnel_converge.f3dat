@@ -1,0 +1,78 @@
+; 檢查隧道周圍(8m內) gridpoint 是否收斂，按隧道三段岩性分
+;   SS_NC : x 2500-2600   Fault : x 2600-2850   SH_ST : x 2850-3000
+; 收斂判斷：|velocity| < 1e-6 視為靜止；>= 視為仍在流動
+model new
+program log-file 'D:/FLAC_AI/3D_far/0601/diag_tunnel_converge.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0601/out/no_shotcrete_v4_final'
+
+fish define diag_tun
+    local yc = 4800.0
+    local zc = 217.0
+    local rnear = 8.0
+    local vthr = 1.0e-6
+    ; 三段: 1=SS_NC 2=Fault 3=SH_ST
+    local n1 = 0
+    local f1 = 0
+    local d1 = 0.0
+    local n2 = 0
+    local f2 = 0
+    local d2 = 0.0
+    local n3 = 0
+    local f3 = 0
+    local d3 = 0.0
+    loop foreach local g gp.list
+        local gy = gp.pos.y(g)
+        local gz = gp.pos.z(g)
+        local dr = math.sqrt((gy-yc)*(gy-yc) + (gz-zc)*(gz-zc))
+        if dr > rnear
+            continue
+        endif
+        local gx = gp.pos.x(g)
+        if gx < 2500.0
+            continue
+        endif
+        if gx > 3000.0
+            continue
+        endif
+        local vx = gp.vel.x(g)
+        local vy = gp.vel.y(g)
+        local vz = gp.vel.z(g)
+        local vm = math.sqrt(vx*vx + vy*vy + vz*vz)
+        local dx = gp.disp.x(g)
+        local dy = gp.disp.y(g)
+        local dz = gp.disp.z(g)
+        local dm = math.sqrt(dx*dx + dy*dy + dz*dz)
+        local flowing = 0
+        if vm >= vthr
+            flowing = 1
+        endif
+        if gx <= 2600.0
+            n1 = n1 + 1
+            f1 = f1 + flowing
+            if dm > d1
+                d1 = dm
+            endif
+        else
+            if gx <= 2850.0
+                n2 = n2 + 1
+                f2 = f2 + flowing
+                if dm > d2
+                    d2 = dm
+                endif
+            else
+                n3 = n3 + 1
+                f3 = f3 + flowing
+                if dm > d3
+                    d3 = dm
+                endif
+            endif
+        endif
+    endloop
+    io.out('TUNSEG SS_NC(2500-2600)  near_gp=' + string(n1) + ' flowing=' + string(f1) + ' max_disp=' + string(d1) + 'm')
+    io.out('TUNSEG Fault(2600-2850)  near_gp=' + string(n2) + ' flowing=' + string(f2) + ' max_disp=' + string(d2) + 'm')
+    io.out('TUNSEG SH_ST(2850-3000)  near_gp=' + string(n3) + ' flowing=' + string(f3) + ' max_disp=' + string(d3) + 'm')
+end
+@diag_tun
+program echo-line 'DIAG_TUN done'
+program quit

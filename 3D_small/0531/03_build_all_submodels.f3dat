@@ -1,0 +1,13 @@
+; ===========================================================
+; 03_build_all_submodels.f3dat
+; 一次建立兩個小模型：
+;   1) sub_2608_build.f3sav
+;   2) sub_2896_build.f3sav
+;
+; 邊界位移與應力狀態等大模型跑完後再讀取。
+; ===========================================================
+
+call 'D:/FLAC_AI/3D_far/0601/03_build_sub_2608.f3dat' suppress
+call 'D:/FLAC_AI/3D_far/0601/03_build_sub_2896.f3dat' suppress
+
+return

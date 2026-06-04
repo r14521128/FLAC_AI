@@ -1,0 +1,16 @@
+; run_c03_sub_2608.f3dat — combo C03 (堅硬：高E高強度)
+model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+[global combo_id = 'c03']
+[global y_SH = 1.3e9]
+[global p_SH = 0.33]
+[global c_SH = 140e3]
+[global f_SH = 36]
+[global y_NC = 1.6e9]
+[global p_NC = 0.22]
+[global c_NC = 260e3]
+[global f_NC = 46]
+[global y_FA = 0.5e9]
+[global p_FA = 0.27]
+[global c_FA = 45e3]
+[global f_FA = 24]
+call 'D:/FLAC_AI/3D_small/0531/2608/_reader_body_sub_2608.f3dat'

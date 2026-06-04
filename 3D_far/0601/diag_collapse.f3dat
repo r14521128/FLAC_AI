@@ -1,0 +1,65 @@
+; 診斷無支撐開挖最終態的數值崩塌範圍
+model new
+program log-file 'D:/FLAC_AI/3D_far/0601/diag_collapse.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0601/out/no_shotcrete_v4_final'
+
+fish define diag_collapse
+    local n_huge = 0
+    local n_big = 0
+    local n_mod = 0
+    local n_ok = 0
+    local n_flow = 0
+    local n_surf = 0
+    local n_fault = 0
+    local n_other = 0
+    loop foreach local g gp.list
+        local dx = gp.disp.x(g)
+        local dy = gp.disp.y(g)
+        local dz = gp.disp.z(g)
+        local dm = math.sqrt(dx*dx + dy*dy + dz*dz)
+        if dm > 5.0
+            n_huge = n_huge + 1
+        else
+            if dm > 1.0
+                n_big = n_big + 1
+            else
+                if dm > 0.1
+                    n_mod = n_mod + 1
+                else
+                    n_ok = n_ok + 1
+                endif
+            endif
+        endif
+        local vx = gp.vel.x(g)
+        local vy = gp.vel.y(g)
+        local vz = gp.vel.z(g)
+        local vm = math.sqrt(vx*vx + vy*vy + vz*vz)
+        if vm > 1.0e-5
+            n_flow = n_flow + 1
+        endif
+        if dm > 1.0
+            local gx = gp.pos.x(g)
+            local gz = gp.pos.z(g)
+            if gz >= 240.0
+                n_surf = n_surf + 1
+            else
+                if gx >= 2600.0
+                    if gx <= 2850.0
+                        n_fault = n_fault + 1
+                    else
+                        n_other = n_other + 1
+                    endif
+                else
+                    n_other = n_other + 1
+                endif
+            endif
+        endif
+    endloop
+    io.out('COLLAPSE disp: huge>5m=' + string(n_huge) + ' big1-5m=' + string(n_big) + ' mod0.1-1m=' + string(n_mod) + ' ok<0.1m=' + string(n_ok))
+    io.out('COLLAPSE still_flowing |v|>1e-5 = ' + string(n_flow))
+    io.out('COLLAPSE bigdisp(>1m) region: surface(z>240)=' + string(n_surf) + ' fault(x2600-2850)=' + string(n_fault) + ' other=' + string(n_other))
+end
+@diag_collapse
+program echo-line 'DIAG_COLLAPSE done'
+program quit

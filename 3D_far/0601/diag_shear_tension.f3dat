@@ -1,0 +1,70 @@
+; 診斷 v2：initial_state_0601 各岩性的「剪力 vs 拉力」降伏拆解
+; shear mask = 1|4 = 5 ; tension mask = 2|8 = 10  (官方 failurestates.fis)
+model new
+program log-file 'D:/FLAC_AI/3D_far/0601/diag_shear_tension.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0601/initial_state_0601'
+
+fish define diag_st
+    local sm = 5
+    local tm = 10
+    ; 順序: SS_NK, Interbedded_ST, SH_ST, SS_NC, Fault
+    local sh_nk = 0
+    local te_nk = 0
+    local sh_int = 0
+    local te_int = 0
+    local sh_sh = 0
+    local te_sh = 0
+    local sh_nc = 0
+    local te_nc = 0
+    local sh_fa = 0
+    local te_fa = 0
+    loop foreach local z zone.list
+        if zone.model(z) = 'null'
+            continue
+        endif
+        local s = zone.state(z,1)
+        local is_sh = 0
+        local is_te = 0
+        if math.and(s, sm) # 0
+            is_sh = 1
+        endif
+        if math.and(s, tm) # 0
+            is_te = 1
+        endif
+        if is_sh = 0
+            if is_te = 0
+                continue
+            endif
+        endif
+        local g = zone.group(z,'lithology')
+        if g = 'SS_NK'
+            sh_nk = sh_nk + is_sh
+            te_nk = te_nk + is_te
+        endif
+        if g = 'Interbedded_ST'
+            sh_int = sh_int + is_sh
+            te_int = te_int + is_te
+        endif
+        if g = 'SH_ST'
+            sh_sh = sh_sh + is_sh
+            te_sh = te_sh + is_te
+        endif
+        if g = 'SS_NC'
+            sh_nc = sh_nc + is_sh
+            te_nc = te_nc + is_te
+        endif
+        if g = 'Fault'
+            sh_fa = sh_fa + is_sh
+            te_fa = te_fa + is_te
+        endif
+    endloop
+    io.out('STATE SS_NK shear=' + string(sh_nk) + ' tension=' + string(te_nk))
+    io.out('STATE Interbedded_ST shear=' + string(sh_int) + ' tension=' + string(te_int))
+    io.out('STATE SH_ST shear=' + string(sh_sh) + ' tension=' + string(te_sh))
+    io.out('STATE SS_NC shear=' + string(sh_nc) + ' tension=' + string(te_nc))
+    io.out('STATE Fault shear=' + string(sh_fa) + ' tension=' + string(te_fa))
+end
+@diag_st
+program echo-line 'DIAG2 done'
+program quit

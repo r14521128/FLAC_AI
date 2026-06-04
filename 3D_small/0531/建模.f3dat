@@ -1,0 +1,21 @@
+; ===========================================================
+; 03_build_sub_2608.f3dat
+; 撠芋sub_2608
+;
+; X: 2558~2658, 1 m/grid, 100 zones in X
+; Y: 4775~4825, 挾
+; Z: 192~242, 挾
+;
+; 祆芸遣蝡璅∪啗釭 tunnel
+; 雿宏憭扳芋摰
+; ===========================================================
+
+model new
+model title 'sub_2608 unsupported excavation submodel mesh'
+
+[sub_xmin = 2558.0]
+[sub_xmax = 2658.0]
+
+call 'D:/FLAC_AI/3D_small/0531/03_build_submodel_common.f3dat' suppress
+
+model save 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'

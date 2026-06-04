@@ -1,0 +1,16 @@
+; run_c05_sub_2608.f3dat — combo C05 (偏硬母岩 + 弱斷層)
+model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+[global combo_id = 'c05']
+[global y_SH = 1.1e9]
+[global p_SH = 0.35]
+[global c_SH = 120e3]
+[global f_SH = 34]
+[global y_NC = 1.4e9]
+[global p_NC = 0.23]
+[global c_NC = 230e3]
+[global f_NC = 44]
+[global y_FA = 0.2e9]
+[global p_FA = 0.31]
+[global c_FA = 22e3]
+[global f_FA = 17]
+call 'D:/FLAC_AI/3D_small/0531/2608/_reader_body_sub_2608.f3dat'

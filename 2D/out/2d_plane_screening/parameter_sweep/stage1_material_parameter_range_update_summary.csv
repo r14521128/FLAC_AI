@@ -1,0 +1,31 @@
+﻿formation,parameter,unit,source_action,n_uploaded_values,min,max,action,value
+SS_NK,density_kg_m3,kg/m3,updated_from_uploaded,2.0,2560.0,2570.0,,
+SS_NK,E_GPa,GPa,updated_from_uploaded,1.0,0.5040378000000001,0.5040378000000001,,
+SS_NK,nu,-,updated_from_uploaded,1.0,0.29,0.29,,
+SS_NK,c_MPa,MPa,updated_from_uploaded,2.0,0.063765,0.254079,,
+SS_NK,phi_deg,deg,updated_from_uploaded,2.0,22.5,37.2,,
+Interbedded_ST,density_kg_m3,kg/m3,updated_from_uploaded,1.0,2520.0,2520.0,,
+Interbedded_ST,E_GPa,GPa,fallback_previous_stats_no_uploaded_value,0.0,0.015,0.23500000000000001,,
+Interbedded_ST,nu,-,fallback_previous_stats_no_uploaded_value,0.0,0.25,0.38,,
+Interbedded_ST,c_MPa,MPa,updated_from_uploaded,1.0,0.144207,0.144207,,
+Interbedded_ST,phi_deg,deg,updated_from_uploaded,1.0,22.3,22.3,,
+SH_ST,density_kg_m3,kg/m3,updated_from_uploaded,6.0,2390.0,2610.0,,
+SH_ST,E_GPa,GPa,updated_from_uploaded,3.0,0.4613643,2.9646801,,
+SH_ST,nu,-,updated_from_uploaded,3.0,0.38,0.4,,
+SH_ST,c_MPa,MPa,updated_from_uploaded,3.0,0.011085,0.307053,,
+SH_ST,phi_deg,deg,updated_from_uploaded,3.0,15.1,53.15,,
+SS_NC,density_kg_m3,kg/m3,updated_from_uploaded,2.0,2420.0,2550.0,,
+SS_NC,E_GPa,GPa,updated_from_uploaded,2.0,2.0999286,4.323168900000001,,
+SS_NC,nu,-,updated_from_uploaded,2.0,0.15,0.21,,
+SS_NC,c_MPa,MPa,updated_from_uploaded,3.0,0.071613,0.377685,,
+SS_NC,phi_deg,deg,updated_from_uploaded,3.0,17.7,49.21,,
+Fault,density_kg_m3,kg/m3,updated_from_uploaded,1.0,2490.0,2490.0,,
+Fault,E_GPa,GPa,fallback_previous_stats_no_uploaded_value,0.0,0.005,0.03,,
+Fault,nu,-,fallback_previous_stats_no_uploaded_value,0.0,0.3,0.4,,
+Fault,c_MPa,MPa,updated_from_uploaded,2.0,0.022269,0.031392,,
+Fault,phi_deg,deg,updated_from_uploaded,2.0,15.8,18.3,,
+Fault_damage_zone_not_used_as_fault_core,density(kg/m3),,,,,,skipped_fault_damage_zone_not_fault_core,2560.0
+Fault_damage_zone_not_used_as_fault_core,E_static(Pa),,,,,,skipped_fault_damage_zone_not_fault_core,3215816100.0
+Fault_damage_zone_not_used_as_fault_core,nu,,,,,,skipped_fault_damage_zone_not_fault_core,0.23
+Fault_damage_zone_not_used_as_fault_core,Cp(Pa) / phi_p(deg),,,,,,skipped_fault_damage_zone_not_fault_core,1243908 / 77.81
+Fault_damage_zone_not_used_as_fault_core,Cr(Pa) / phi_r(deg),,,,,,skipped_fault_damage_zone_not_fault_core,88584 / 24.30

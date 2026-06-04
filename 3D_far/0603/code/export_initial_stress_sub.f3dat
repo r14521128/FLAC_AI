@@ -1,0 +1,55 @@
+; ===========================================================
+; export_initial_stress_sub.f3dat  (0603)
+; Export initial stress of the two submodel boxes from the 0603
+; initial state, for the submodel 3D-bucket IDW reader.
+;
+; source : D:/FLAC_AI/3D_far/0603/initial_state_0603.f3sav
+; output : D:/FLAC_AI/3D_far/0603/far_out/initial_stress_sub_2608.dat
+;          D:/FLAC_AI/3D_far/0603/far_out/initial_stress_sub_2896.dat
+;          format (space separated): zid x y z sxx syy szz sxy sxz syz
+;
+; ASCII-only comments (CJK comment ending a line can eat the newline
+; in the FLAC3D console parser and merge with the next command).
+; ===========================================================
+model new
+program log-file 'D:/FLAC_AI/3D_far/0603/far_out/export_initial_stress.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0603/initial_state_0603'
+
+; box extents (same as 0601): y 4775..4825, z 192..242
+; sub_2608: x 2558..2658 ; sub_2896: x 2846..2946
+fish define export_box(path, xlo, xhi)
+    local fl = array.create(1)
+    local status = file.open(path, 1, 1)
+    fl(1) = 'zid x y z sxx syy szz sxy sxz syz'
+    status = file.write(fl, 1)
+    local count = 0
+    loop foreach local iz zone.list
+        local xx = zone.pos.x(iz)
+        if xx >= xlo
+            if xx <= xhi
+                local yy = zone.pos.y(iz)
+                if yy >= 4775.0
+                    if yy <= 4825.0
+                        local zz = zone.pos.z(iz)
+                        if zz >= 192.0
+                            if zz <= 242.0
+                                fl(1) = string(zone.id(iz)) + ' ' + string(xx) + ' ' + string(yy) + ' ' + string(zz) + ' ' + string(zone.stress.xx(iz)) + ' ' + string(zone.stress.yy(iz)) + ' ' + string(zone.stress.zz(iz)) + ' ' + string(zone.stress.xy(iz)) + ' ' + string(zone.stress.xz(iz)) + ' ' + string(zone.stress.yz(iz))
+                                status = file.write(fl, 1)
+                                count = count + 1
+                            endif
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endloop
+    status = file.close
+    io.out('exported ' + path + ' : ' + string(count) + ' zones')
+end
+
+[export_box('D:/FLAC_AI/3D_far/0603/far_out/initial_stress_sub_2608.dat', 2558.0, 2658.0)]
+[export_box('D:/FLAC_AI/3D_far/0603/far_out/initial_stress_sub_2896.dat', 2846.0, 2946.0)]
+
+program echo-line '=== 0603 export initial stress complete ==='
+program quit

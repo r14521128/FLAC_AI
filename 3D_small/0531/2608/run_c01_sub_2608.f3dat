@@ -1,0 +1,16 @@
+; run_c01_sub_2608.f3dat — combo C01 (基準/現值)
+model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+[global combo_id = 'c01']
+[global y_SH = 0.8e9]
+[global p_SH = 0.38]
+[global c_SH = 100e3]
+[global f_SH = 32]
+[global y_NC = 1.0e9]
+[global p_NC = 0.25]
+[global c_NC = 200e3]
+[global f_NC = 42]
+[global y_FA = 0.3e9]
+[global p_FA = 0.30]
+[global c_FA = 30e3]
+[global f_FA = 20]
+call 'D:/FLAC_AI/3D_small/0531/2608/_reader_body_sub_2608.f3dat'

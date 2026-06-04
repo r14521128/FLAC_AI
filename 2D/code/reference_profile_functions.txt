@@ -1,0 +1,412 @@
+
+================================================================================
+def load_surfaces
+================================================================================
+
+def load_surfaces(surface_stl_map):
+    """Read all geologic interface STL meshes."""
+    meshes = {}
+    for surf, path in surface_stl_map.items():
+        if not os.path.exists(path):
+            raise FileNotFoundError(f"Interface STL not found: {path}")
+        mesh = pv.read(path).triangulate()
+        meshes[surf] = mesh
+        oe = mesh.n_open_edges
+        flag = "OK" if oe == 0 else "OPEN"
+        print(f"  {flag} {surf}: open_edges={oe}")
+    return meshes
+
+
+# ── 射線交點 ──────────────────────────────────────────────
+
+================================================================================
+def tunnel_contacts
+================================================================================
+
+def tunnel_contacts(df_tunnel, meshes, dedup_tol=0.02):
+    """計算隧道線形與各地層介面的交點，輸出 Mileage / E / N / Z。"""
+    xyz     = df_tunnel[["E", "N", "Z"]].to_numpy(dtype=float)
+    mileage = df_tunnel["Mileage"].to_numpy(dtype=float)
+    records = []
+    for i in range(len(xyz) - 1):
+        p0, p1 = xyz[i], xyz[i + 1]
+        seg = p1 - p0
+        seg_len = np.linalg.norm(seg)
+        if seg_len == 0:
+            continue
+        for surf, mesh in meshes.items():
+            for h in segment_hits_with_mesh(p0, p1, mesh):
+                t = float(np.clip(np.dot(h - p0, seg) / seg_len**2, 0.0, 1.0))
+                records.append({
+                    "surface":     surf,
+                    "segment_idx": i,
+                    "Mileage":     float(mileage[i] + t * (mileage[i+1] - mileage[i])),
+                    "E": float(h[0]), "N": float(h[1]), "Z": float(h[2]),
+                })
+    df = pd.DataFrame(records)
+    if df.empty: return df
+    df = df.sort_values(["surface", "Mileage"]).reset_index(drop=True)
+    df = dedup_hits(df, key_cols=["surface"], tol=dedup_tol)
+    return df.sort_values("Mileage").reset_index(drop=True)
+
+
+# ── 鑽孔交點計算 ──────────────────────────────────────────
+
+================================================================================
+def auto_align_tunnel_coords
+================================================================================
+
+def auto_align_tunnel_coords(df_tunnel, meshes, shift_x=270000.0, shift_y=2740000.0):
+    """
+    自動判斷隧道線形是否需要 global ↔ local 平移以對齊 STL。
+    測試三種情境：as_is / minus_shift / plus_shift，取重疊分數最高者。
+    """
+    candidates = {
+        "as_is":       df_tunnel.copy(),
+        "minus_shift": df_tunnel.assign(E=df_tunnel["E"] - shift_x, N=df_tunnel["N"] - shift_y),
+        "plus_shift":  df_tunnel.assign(E=df_tunnel["E"] + shift_x, N=df_tunnel["N"] + shift_y),
+    }
+    scores  = {k: _count_en_overlap(v, meshes) for k, v in candidates.items()}
+    best_key = max(scores, key=lambda k: scores[k])
+
+    print("\n[座標對齊]")
+    print(f"  overlap 分數：{scores}  → 採用：{best_key}")
+    return candidates[best_key], best_key
+
+
+print("✅ Cell 3 函式載入完成。")
+
+================================================================================
+def extract_surface_profile_along_tunnel
+================================================================================
+
+def extract_surface_profile_along_tunnel(df_tunnel_aligned, meshes):
+    import pyvista as pv
+    mileage  = df_tunnel_aligned["Mileage"].to_numpy(dtype=float)
+    xyz      = df_tunnel_aligned[["E", "N", "Z"]].to_numpy(dtype=float)
+    profiles = {}
+    for surf_name, mesh in meshes.items():
+        z_arr = np.full(len(mileage), np.nan)
+        for i, pt in enumerate(xyz):
+            tun_z = pt[2]
+            p0u = pt.copy(); p0u[2] = tun_z - 1.0
+            p1u = pt.copy(); p1u[2] = tun_z + 2000.0
+            hits_up, _ = mesh.ray_trace(p0u, p1u, first_point=False)
+            p0d = pt.copy(); p0d[2] = tun_z + 1.0
+            p1d = pt.copy(); p1d[2] = tun_z - 2000.0
+            hits_dn, _ = mesh.ray_trace(p0d, p1d, first_point=False)
+            all_hits = []
+            if hits_up is not None and len(hits_up) > 0:
+                all_hits.extend(np.asarray(hits_up, dtype=float)[:, 2].tolist())
+            if hits_dn is not None and len(hits_dn) > 0:
+                all_hits.extend(np.asarray(hits_dn, dtype=float)[:, 2].tolist())
+            if all_hits:
+                z_arr[i] = float(min(all_hits, key=lambda z: abs(z - tun_z)))
+        profiles[surf_name] = {"mileage": mileage.copy(), "z": z_arr}
+        valid_cnt = int(np.sum(~np.isnan(z_arr)))
+        print(f"  {surf_name}: {valid_cnt}/{len(mileage)} valid profile points")
+    return profiles
+
+
+
+================================================================================
+def extract_topography_along_tunnel
+================================================================================
+
+def extract_topography_along_tunnel(topo_stl_path, df_tunnel_aligned):
+    import pyvista as pv
+    topo_mesh = pv.read(topo_stl_path).triangulate()
+    mileage   = df_tunnel_aligned["Mileage"].to_numpy(dtype=float)
+    topo_z    = np.full(len(mileage), np.nan)
+    xyz       = df_tunnel_aligned[["E", "N", "Z"]].to_numpy(dtype=float)
+    for i, pt in enumerate(xyz):
+        p0 = pt.copy(); p0[2] -= 1.0
+        p1 = pt.copy(); p1[2] += 2000.0
+        hits, _ = topo_mesh.ray_trace(p0, p1, first_point=False)
+        if hits is not None and len(hits) > 0:
+            topo_z[i] = float(np.max(np.asarray(hits, dtype=float)[:, 2]))
+    valid = int(np.sum(~np.isnan(topo_z)))
+    print(f"  Topography STL valid profile points: {valid}/{len(topo_z)} (open_edges={topo_mesh.n_open_edges})")
+    return mileage, topo_z
+
+
+
+================================================================================
+def _draw_elements
+================================================================================
+
+def _draw_elements(
+    ax, df_tunnel_aligned, df_bh_projected, df_bh_hit, df_tunnel_hit,
+    topo_mileage, topo_z, surface_profiles, colors, DEFAULT_C,
+    draw_topo, draw_bh, draw_surf_label, y_lim, draw_round_label=True,
+    f1_bot=None, f1_top=None, fault1_color="orangered",      fault1_label="Fault 1",
+    f2_bot=None, f2_top=None, fault2_color="steelblue",      fault2_label="Fault 2",
+    f3_bot=None, f3_top=None, fault3_color="mediumseagreen", fault3_label="Fault 3",
+    round_df=None,
+    sidebar_lines=None,
+):
+    if draw_topo:
+        valid_t = topo_z[~np.isnan(topo_z)]
+        z_floor = np.nanmin(valid_t) - 80 if len(valid_t) > 0 else 0
+        ax.fill_between(topo_mileage, topo_z, y2=z_floor,
+                        color="wheat", alpha=0.35, zorder=2)
+        ax.plot(topo_mileage, topo_z, color="saddlebrown", lw=2.0,
+                label="Surface topography (STL)", zorder=5)
+
+    m_arr     = df_tunnel_aligned["Mileage"].to_numpy(dtype=float)
+    z_tun_arr = df_tunnel_aligned["Z"].to_numpy(dtype=float)
+
+    # Fault 1：只標 top（上界碰隧道），bot 移到左上角
+    _draw_fault_band(ax, m_arr, z_tun_arr, f1_bot, f1_top,
+                     fault1_color, fault1_label, round_df, y_lim,
+                     annotate_top=True, annotate_bot=False,
+                     sidebar_lines=sidebar_lines)
+
+    # Fault 2：top 和 bot 都移到左上角
+    _draw_fault_band(ax, m_arr, z_tun_arr, f2_bot, f2_top,
+                     fault2_color, fault2_label, round_df, y_lim,
+                     annotate_top=False, annotate_bot=False,
+                     sidebar_lines=sidebar_lines)
+
+    # Fault 3：只標 bot（下界碰隧道），top 移到左上角
+    _draw_fault_band(ax, m_arr, z_tun_arr, f3_bot, f3_top,
+                     fault3_color, fault3_label, round_df, y_lim,
+                     annotate_top=False, annotate_bot=True,
+                     sidebar_lines=sidebar_lines)
+
+    if surface_profiles:
+        for surf_name, prof in surface_profiles.items():
+            c    = colors.get(surf_name, DEFAULT_C)
+            z_ma = np.ma.masked_where(np.isnan(prof["z"]), prof["z"])
+            ax.plot(prof["mileage"], z_ma, color=c, lw=2.2, ls="-",
+                    label=surf_name, zorder=6)
+            if draw_surf_label:
+                valid_idx = np.where(~np.isnan(prof["z"]))[0]
+                if len(valid_idx) > 0:
+                    mid     = valid_idx[len(valid_idx) // 2]
+                    y_label = prof["z"][mid]
+                    if y_lim is None or (y_lim[0] <= y_label <= y_lim[1]):
+                        ax.text(
+                            prof["mileage"][mid], y_label + 8, surf_name,
+                            fontsize=9, color=c, fontweight="bold",
+                            ha="center", va="bottom",
+                            bbox=dict(facecolor="white", edgecolor="none",
+                                      alpha=0.65, pad=1.5),
+                            zorder=12,
+                        )
+
+    ax.plot(df_tunnel_aligned["Mileage"], df_tunnel_aligned["Z"],
+            color="black", lw=1.8, label="Tunnel alignment (crown Z)", zorder=7)
+
+    if not df_tunnel_hit.empty:
+        for _, row in df_tunnel_hit.iterrows():
+            c = colors.get(row["surface"], DEFAULT_C)
+            if y_lim is None or (y_lim[0] <= row["Z"] <= y_lim[1]):
+                ax.plot(row["Mileage"], row["Z"], "^", color=c, ms=7,
+                        markeredgecolor="white", markeredgewidth=0.9, zorder=13)
+                if draw_round_label:
+                    parsed  = _parse_round_label(row.get("round_label", ""))
+                    m_val   = float(row["Mileage"])
+                    display = f"M={m_val:.0f}m ({parsed})" if parsed else f"M={m_val:.0f}m"
+                    ax.annotate(
+                        display,
+                        xy=(row["Mileage"], row["Z"]),
+                        xytext=(6, 8), textcoords="offset points",
+                        fontsize=7.5, color="black", ha="left", va="bottom",
+                        bbox=dict(facecolor="white", edgecolor=c,
+                                  alpha=0.9, pad=1.6),
+                        zorder=14,
+                    )
+
+    if draw_bh and not df_bh_projected.empty:
+        for _, bh in df_bh_projected.iterrows():
+            mp_bh, z_t, z_b = bh["proj_mileage"], bh["Z_top"], bh["Z_bot"]
+            if y_lim is not None:
+                if z_t < y_lim[0] or z_t > y_lim[1]:
+                    continue
+                z_b = max(z_b, y_lim[0])
+            ax.plot([mp_bh, mp_bh], [z_b, z_t], color="darkred",
+                    lw=2.5, solid_capstyle="round", zorder=9)
+            ax.plot(mp_bh, z_t, marker="v", color="darkred", ms=6, zorder=10)
+            label_y = z_t + (y_lim[1] - y_lim[0]) * 0.03 if y_lim else z_t + 4
+            if y_lim is None or label_y <= y_lim[1]:
+                ax.text(mp_bh, label_y, bh["hole_id"], fontsize=7.5,
+                        color="darkred", ha="center", va="bottom",
+                        fontweight="bold", zorder=10)
+            if not df_bh_hit.empty:
+                bh_hits = df_bh_hit[df_bh_hit["hole_id"] == bh["hole_id"]]
+                for _, hit in bh_hits.iterrows():
+                    if y_lim and not (y_lim[0] <= hit["Z"] <= y_lim[1]):
+                        continue
+                    c = colors.get(hit["surface"], DEFAULT_C)
+                    ax.plot(mp_bh, hit["Z"], "o", color=c, ms=6,
+                            markeredgecolor="white", markeredgewidth=0.8,
+                            zorder=11)
+
+    if y_lim:
+        ax.set_ylim(y_lim)
+    ax.xaxis.set_major_locator(mticker.MultipleLocator(50))
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(50))
+    ax.grid(True, which="major", ls="--", alpha=0.35, zorder=1)
+
+
+
+================================================================================
+def plot_2d_profile
+================================================================================
+
+def plot_2d_profile(
+    df_tunnel_aligned,
+    df_bh_projected,
+    df_bh_hit,
+    df_tunnel_hit,
+    topo_mileage,
+    topo_z,
+    surface_profiles=None,
+    surf_colors=None,
+    invert_x=True,
+    summary_top_n=8,
+    scale_m_per_inch=50.0,
+    dpi=200,
+    output_png=None,
+    # ── 三條斷層 ──
+    fault1_surface=None,  fault1_thickness=40.0,
+    fault1_color="orangered",      fault1_label="Fault 1",
+    fault2_surface=None,  fault2_thickness=7.5,
+    fault2_color="steelblue",      fault2_label="Fault 2",
+    fault3_thickness=5.0,
+    fault3_color="mediumseagreen", fault3_label="Fault 3",
+    round_df=None,
+    annotate_topo_dip=False,
+):
+    colors    = surf_colors or SURF_COLORS
+    DEFAULT_C = "tab:purple"
+    Y_MIN, Y_MAX = 0, 700
+    y_lim    = (Y_MIN, Y_MAX)
+    y_range  = Y_MAX - Y_MIN
+
+    m_arr   = df_tunnel_aligned["Mileage"].to_numpy(dtype=float)
+    x_range = float(m_arr.max() - m_arr.min())
+    scale   = 1.0 / scale_m_per_inch
+    ax_w_in = x_range * scale
+    ax_h_in = y_range * scale
+
+    M_LEFT, M_RIGHT, M_BOTTOM, M_TOP = 0.9, 3.8, 1.1, 0.6
+    fig_w = M_LEFT + ax_w_in + M_RIGHT
+    fig_h = M_BOTTOM + ax_h_in + M_TOP
+
+    print(f"  scale: 1:{scale_m_per_inch*100:.0f}; figure: {fig_w:.1f} x {fig_h:.1f} in; "
+          f"axes: {ax_w_in:.1f} x {ax_h_in:.1f} in")
+    fig, ax = plt.subplots(1, 1, figsize=(fig_w, fig_h))
+    ax.set_position([M_LEFT / fig_w, M_BOTTOM / fig_h, ax_w_in / fig_w, ax_h_in / fig_h])
+    ax.set_aspect("equal", adjustable="box")
+
+    # 計算三條斷層陣列
+    (f1_bot, f1_top), (f2_bot, f2_top), (f3_bot, f3_top) = _build_fault_arrays(
+        surface_profiles,
+        fault1_surface, fault1_thickness,
+        fault2_surface, fault2_thickness,
+        fault3_thickness,
+    )
+
+    # sidebar_lines 收集「移到左上角」的斷層交點標註
+    sidebar_lines = []
+
+    _draw_elements(
+        ax, df_tunnel_aligned, df_bh_projected, df_bh_hit, df_tunnel_hit,
+        topo_mileage, topo_z, surface_profiles, colors, DEFAULT_C,
+        draw_topo=True, draw_bh=True, draw_surf_label=True, y_lim=y_lim,
+        f1_bot=f1_bot, f1_top=f1_top, fault1_color=fault1_color, fault1_label=fault1_label,
+        f2_bot=f2_bot, f2_top=f2_top, fault2_color=fault2_color, fault2_label=fault2_label,
+        f3_bot=f3_bot, f3_top=f3_top, fault3_color=fault3_color, fault3_label=fault3_label,
+        round_df=round_df,
+        sidebar_lines=sidebar_lines,
+    )
+
+    ax.set_ylabel("Elevation Z (m)", fontsize=11)
+    ax.set_title(
+        f"Tunnel Longitudinal Profile (1:{int(scale_m_per_inch*100)}) - "
+        f"Topography / Interface Contacts / Rounds / Boreholes",
+        fontsize=13, fontweight="bold", pad=8,
+    )
+
+    # ── 左上角文字框：原有摘要 + 斷層交點 sidebar ──────────────
+    if df_tunnel_hit is not None and not df_tunnel_hit.empty:
+        hit_preview   = df_tunnel_hit.sort_values("Mileage").head(6)
+        summary_lines = ["Early interface contacts (first 6)"]
+        for i, (_, row) in enumerate(hit_preview.iterrows(), 1):
+            parsed  = _parse_round_label(row.get("round_label", ""))
+            rnd_txt = f" ({parsed})" if parsed else ""
+            summary_lines.append(
+                f"{i:>2}. {row['Mileage']:7.1f} m | {row['surface']}{rnd_txt}")
+    else:
+        summary_lines = ["Early interface contacts", "No data"]
+
+    summary_lines += ["", "Borehole contact depths"]
+    if df_bh_hit is not None and not df_bh_hit.empty:
+        for _, row in df_bh_hit.sort_values(["hole_id", "depth_m"]).head(12).iterrows():
+            summary_lines.append(
+                f"{row['hole_id']:<6} | {row['surface']:<18} | {row['depth_m']:5.1f} m")
+    else:
+        summary_lines.append("No borehole contacts")
+
+    summary_lines += ["", f"Projection mismatch dZ (top {summary_top_n})"]
+    diag_df = summarize_bh_projection_mismatch(
+        df_bh_projected, df_bh_hit, surface_profiles, top_n=summary_top_n)
+    if not diag_df.empty:
+        for _, row in diag_df.iterrows():
+            summary_lines.append(
+                f"{row['hole_id']:<6} dist={row['offset_m']:5.1f}m "
+                f"dZ={row['delta_z']:+6.2f}m")
+    else:
+        summary_lines.append("No diagnostic rows")
+
+    # 斷層交點 sidebar（移到左上角的那些）
+    if sidebar_lines:
+        summary_lines += ["", "── Fault crossings (sidebar) ──"]
+        for _, txt in sidebar_lines:
+            summary_lines.append(txt)
+
+    ax.text(
+        0.01, 0.99, "\n".join(summary_lines),
+        transform=ax.transAxes, ha="left", va="top",
+        fontsize=9.0, color="black", family="DejaVu Sans Mono",
+        bbox=dict(facecolor="white", edgecolor="black", alpha=0.95, pad=4.0),
+        zorder=20,
+    )
+
+    if invert_x:
+        ax.invert_xaxis()
+        ax.set_xlabel("Mileage (m), start at right", fontsize=11)
+    else:
+        ax.set_xlabel("Mileage (m)", fontsize=11)
+
+    m_vals = df_tunnel_aligned["Mileage"].to_numpy(dtype=float)
+    e_vals = df_tunnel_aligned["E"].to_numpy(dtype=float)
+    x_lim  = ax.get_xlim()
+    lo, hi = min(x_lim), max(x_lim)
+    tick_locs        = [t for t in ax.get_xticks() if lo <= t <= hi]
+    local_x_at_ticks = np.interp(tick_locs, m_vals, e_vals)
+
+    ax_lx = ax.twiny()
+    ax_lx.set_xlim(ax.get_xlim())
+    ax_lx.xaxis.set_ticks_position("bottom")
+    ax_lx.xaxis.set_label_position("bottom")
+    ax_lx.spines["bottom"].set_position(("outward", 42))
+    ax_lx.spines["top"].set_visible(False)
+    ax_lx.set_xticks(tick_locs)
+    ax_lx.set_xticklabels([f"{v:.0f}" for v in local_x_at_ticks], fontsize=8)
+    ax_lx.set_xlabel("LOCAL_X (m)", fontsize=9)
+
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(dict(zip(l, h)).values(), dict(zip(l, h)).keys(),
+              loc="upper right", bbox_to_anchor=(1.0, 1.0),
+              fontsize=8, framealpha=0.85)
+
+    if output_png:
+        fig.savefig(output_png, dpi=dpi, bbox_inches="tight")
+        print(f"Profile figure saved: {output_png}")
+    plt.show()
+
+
+print("Profile plotting helpers loaded.")
