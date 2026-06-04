@@ -13,13 +13,13 @@
 !*.csv
 !*.xlsx
 !*.ps1
-!*.log
 !*.png
 !.gitignore
 
 # Always exclude generated/runtime and sensitive local files.
 __pycache__/
 *.pyc
+*.log
 *.f3sav
 *.sav
 *.f3prj
