@@ -1,0 +1,27 @@
+**********************************************
+* Logging started at 週四 六月 4 01:07:57 2026
+* By flac3d Version 6.00 Release 069
+* 
+* 
+* Job Title: 
+**********************************************
+flac3d>model new
+flac3d>model deterministic on
+flac3d>model precision 1
+flac3d>model random 10000
+flac3d>model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+********************************************
+Save file created by FLAC3D 6.00.69.0
+on 週一 六月 1 21:39:53 2026
+Total Cycles: 0  Super Cycles: 0
+Title: sub_2608 unsupported excavation submodel mesh
+Customer: 
+        : 
+********************************************
+flac3d>program echo-line '=== AFTER RESTORE ==='
+=== AFTER RESTORE === 
+flac3d>model gravity 0 0 -9.81
+--- Gravity has been set to: ( 0.000000e+00 0.000000e+00 -9.810000e+00).
+flac3d>program echo-line '=== AFTER GRAVITY ==='
+=== AFTER GRAVITY === 
+flac3d>program quit

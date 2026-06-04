@@ -1,0 +1,468 @@
+; ===========================================================
+; excav_monitor.f3dat  (production excavation + monitoring)
+; Staged L/R excavation + segmental shotcrete liner (lag 1 step,
+; wall-face method) + monitoring + plastic thickness.
+; ASCII-only comments on purpose: a comment line ending in a CJK
+; character eats the trailing newline in the FLAC3D console parser
+; and merges with the next command line. Keep this file ASCII.
+; ===========================================================
+model new
+program log-file 'D:/FLAC_AI/3D_far/0603/out/excav_monitor.log'
+program log on
+warning off
+model restore 'D:/FLAC_AI/3D_far/0603/initial_state_0603'
+zone gridpoint initialize displacement (0,0,0)
+zone gridpoint initialize velocity (0,0,0)
+
+; rock = all non-tunnel zones (before any excavation). Put it in a
+; dedicated slot 'support' so it never clashes with default
+; (tunnel/excavation) or the lithology slot. Excavated zones leave
+; 'tunnel' later but were never tagged 'rock', so they never mix in.
+zone group 'rock' slot 'support' range group 'tunnel' not
+
+[global FINE_HALF   = 36.0]
+[global DX_FINE     = 2.0]
+[global DX_COARSE   = 10.0]
+[global L_STOP      = 2780.0]
+[global R_STOP      = 2780.0]
+[global RATIO_FINE  = 1.0e-5]
+[global RATIO_COARSE= 1.0e-4]
+[global SCHUNK      = 500]
+[global SOLVE_CAP   = 20000]
+[global MIN_CYCLES  = 2000]
+[global MON1        = 2608.0]
+[global MON2        = 2896.0]
+[global MAX_RING    = 15.0]
+[global XMARGIN     = 1.02]
+; shotcrete covers crown + sidewalls only, NOT the invert.
+; line faces with centroid z >= Z_LINER_BOT (tunnel center z=217,
+; crown z=220, invert z=214). 215.0 leaves ~1m invert arc unlined.
+[global Z_LINER_BOT = 215.0]
+[global Z_LINER_TOP = 221.0]
+[global SMOKE_CAP   = 0]
+[global csv_path    = 'D:/FLAC_AI/3D_far/0603/out/excav_monitor.csv']
+
+; cycle checkpoints for the detailed monitoring-step record
+[global MCR = array.create(7)]
+[global junk = 0]
+fish define set_mcr
+    MCR(1) = 50
+    MCR(2) = 100
+    MCR(3) = 200
+    MCR(4) = 300
+    MCR(5) = 400
+    MCR(6) = 500
+    MCR(7) = 1000
+end
+@set_mcr
+
+; tunnel x range
+[global TX_MIN = 1e30]
+[global TX_MAX = -1e30]
+fish define find_tunnel_range
+    loop foreach local z zone.list
+        if zone.group(z,'default') = 'tunnel'
+            local xx = zone.pos.x(z)
+            if xx < TX_MIN
+                TX_MIN = xx
+            endif
+            if xx > TX_MAX
+                TX_MAX = xx
+            endif
+        endif
+    endloop
+    io.out('tunnel x range: ' + string(TX_MIN) + ' ~ ' + string(TX_MAX))
+end
+@find_tunnel_range
+
+; monitoring gridpoints
+[global gC1 = gp.near(MON1, 4800.0, 220.0)]
+[global gL1 = gp.near(MON1, 4797.0, 217.0)]
+[global gR1 = gp.near(MON1, 4803.0, 217.0)]
+[global gC2 = gp.near(MON2, 4800.0, 220.0)]
+[global gL2 = gp.near(MON2, 4797.0, 217.0)]
+[global gR2 = gp.near(MON2, 4803.0, 217.0)]
+
+fish define is_fine(xx)
+    is_fine = 0
+    if math.abs(xx - MON1) <= FINE_HALF
+        is_fine = 1
+    endif
+    if math.abs(xx - MON2) <= FINE_HALF
+        is_fine = 1
+    endif
+end
+
+; liner on the tunnel wall of this segment only = internal faces
+; between rock (live) and excavation (null), limited by position-x.
+; Same idiom as official datafiles AdvancingLinedTunnel:
+;   zone face group ... internal range group A group B -> liner by-face
+; Unique id per segment; properties set on that id only; then move
+; the faces from 'wallnow' to 'lined' (re-select same criteria) so
+; 'wallnow' is empty for the next step (no accumulation / re-lining).
+[global g_lid = 0]
+fish define make_liner(xa, xb)
+    g_lid = g_lid + 1
+    command
+        zone face group 'wallnow' slot 'liner' internal range group 'rock' group 'excavation' position-x [xa] [xb] position-z [Z_LINER_BOT] [Z_LINER_TOP]
+        struct liner create by-face id [g_lid] range group 'wallnow' slot 'liner'
+        struct liner property isotropic=(23.5e9, 0.2) thickness=0.2 density=2400 range id [g_lid]
+        struct liner property coupling-stiffness-normal=1e10 coupling-stiffness-shear=1e10 coupling-cohesion-shear=1e20 range id [g_lid]
+        zone face group 'lined' slot 'liner' internal range group 'rock' group 'excavation' position-x [xa] [xb] position-z [Z_LINER_BOT] [Z_LINER_TOP]
+    endcommand
+end
+
+fish define excavate(xa, xb)
+    command
+        zone group 'excavation' range group 'tunnel' position-x [xa] [xb]
+        zone cmodel assign null range group 'excavation'
+    endcommand
+end
+
+fish define solve_step(rtarget)
+    local total = 0
+    solve_step = 0
+    loop while total < SOLVE_CAP
+        command
+            model cycle [SCHUNK]
+        endcommand
+        total = total + SCHUNK
+        if total >= MIN_CYCLES
+            if zone.mech.ratio <= rtarget
+                solve_step = total
+                exit
+            endif
+        endif
+    endloop
+    if solve_step = 0
+        solve_step = total
+    endif
+end
+
+; plastic thickness within [g_qxmin, g_qxmax]
+[global g_marker   = 0]
+[global g_qxmin    = 0.0]
+[global g_qxmax    = 0.0]
+[global g_thick    = 0.0]
+[global g_nplastic = 0]
+fish define calc_plastic
+    local qmin = g_qxmin - XMARGIN
+    local qmax = g_qxmax + XMARGIN
+    g_marker = g_marker + 1
+    local marker = g_marker
+    local pbits = 1023
+    loop foreach local z zone.list
+        local xz = zone.pos.x(z)
+        if xz >= qmin
+            if xz <= qmax
+                local igp
+                loop igp (1,8)
+                    local g = zone.gp(z, igp)
+                    if zone.model(z) = 'null'
+                        if zone.group(z,'default') = 'excavation'
+                            gp.extra(g,21) = marker
+                        endif
+                    else
+                        if zone.group(z,'default') # 'tunnel'
+                            if zone.group(z,'default') # 'excavation'
+                                gp.extra(g,22) = marker
+                            endif
+                        endif
+                    endif
+                end_loop
+            endif
+        endif
+    endloop
+    local ncon = 0
+    loop foreach local gc gp.list
+        if gp.extra(gc,21) = marker
+            if gp.extra(gc,22) = marker
+                ncon = ncon + 1
+            endif
+        endif
+    endloop
+    local cy = array.create(ncon + 1)
+    local cz = array.create(ncon + 1)
+    local ic = 0
+    loop foreach local gc2 gp.list
+        if gp.extra(gc2,21) = marker
+            if gp.extra(gc2,22) = marker
+                ic = ic + 1
+                cy(ic) = gp.pos.y(gc2)
+                cz(ic) = gp.pos.z(gc2)
+            endif
+        endif
+    endloop
+    local mthick = 0.0
+    local nplas = 0
+    loop foreach local z2 zone.list
+        local xz2 = zone.pos.x(z2)
+        if xz2 >= qmin
+            if xz2 <= qmax
+                if zone.model(z2) # 'null'
+                    if zone.group(z2,'default') # 'tunnel'
+                        if zone.group(z2,'default') # 'excavation'
+                            local st = zone.state(z2,1)
+                            if math.and(st, pbits) # 0
+                                local zy = zone.pos.y(z2)
+                                local zz = zone.pos.z(z2)
+                                local mind = 1.0e30
+                                if ncon > 0
+                                    local ip
+                                    loop ip (1, ncon)
+                                        local dy = zy - cy(ip)
+                                        local dz = zz - cz(ip)
+                                        local d = math.sqrt(dy*dy + dz*dz)
+                                        if d < mind
+                                            mind = d
+                                        endif
+                                    end_loop
+                                endif
+                                if mind <= MAX_RING
+                                    nplas = nplas + 1
+                                    if mind > mthick
+                                        mthick = mind
+                                    endif
+                                endif
+                            endif
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endloop
+    if ncon = 0
+        g_thick = -1.0
+    else
+        g_thick = mthick
+    endif
+    g_nplastic = nplas
+end
+
+; ===========================================================
+; submodel boundary gp displacement export (-> far_out)
+; FISH file IO can keep only ONE file open at a time and has no
+; append mode, so:
+;   - the boundary file (big, written every step) is the single
+;     persistent open file during the run;
+;   - the small monitor table is buffered in a FISH array and
+;     flushed to its own CSV at the very end.
+; Boundary gp list = the exact gp ids picked by the 0601 reader
+; (same mesh -> same gp ids). gplist.txt = count line + one id/line.
+; ===========================================================
+[global gplist_path = 'D:/FLAC_AI/3D_far/0603/far_out/submodel_boundary_gplist.txt']
+[global bnd_path    = 'D:/FLAC_AI/3D_far/0603/far_out/submodel_boundary_displacement.csv']
+[global g_nbgp = 0]
+[global g_bgp  = array.create(1)]
+fish define read_boundary_gps
+    local aa = array.create(1)
+    local stt = file.open(gplist_path, 0, 1)
+    stt = file.read(aa, 1)
+    g_nbgp = int(string.token(aa(1), 1))
+    g_bgp = array.create(g_nbgp)
+    local i
+    loop i (1, g_nbgp)
+        stt = file.read(aa, 1)
+        g_bgp(i) = gp.find(int(string.token(aa(1), 1)))
+    endloop
+    stt = file.close
+    io.out('boundary gps loaded: ' + string(g_nbgp))
+end
+@read_boundary_gps
+
+; monitor table buffered in memory (flushed at end)
+[global g_mon  = array.create(4000)]
+[global g_nmon = 0]
+fish define add_mon(s)
+    g_nmon = g_nmon + 1
+    g_mon(g_nmon) = s
+end
+[add_mon('step,phase,Lxa,Lxb,Rxa,Rxb,fine,cycle,ratio_avg,L_thick,L_nplas,R_thick,R_nplas,crown2608_z,wallL2608_y,wallR2608_y,conv2608,crown2896_z,wallL2896_y,wallR2896_y,conv2896,n_lined')]
+
+; open the boundary file (persistent) + header
+[global fbnd = file.open(bnd_path, 1, 1)]
+fish define write_bnd_header
+    local a = array.create(1)
+    a(1) = 'step,phase,cycle,gp_id,ux,uy,uz'
+    local st = file.write(a, 1)
+end
+@write_bnd_header
+
+fish define write_boundary(stp, phase, cyc)
+    local a = array.create(1)
+    local i
+    loop i (1, g_nbgp)
+        local g = g_bgp(i)
+        a(1) = string(stp) + ',' + phase + ',' + string(cyc) + ',' + string(gp.id(g)) + ',' + string(gp.disp.x(g)) + ',' + string(gp.disp.y(g)) + ',' + string(gp.disp.z(g))
+        local st = file.write(a, 1)
+    endloop
+end
+
+fish define write_row(stp, phase, lxa, lxb, rxa, rxb, fine, cyc, nlined, doplas)
+    local Lthk = 0.0
+    local Lnp = 0
+    local Rthk = 0.0
+    local Rnp = 0
+    if doplas = 1
+        g_qxmin = lxa
+        g_qxmax = lxb
+        calc_plastic
+        Lthk = g_thick
+        Lnp = g_nplastic
+        g_qxmin = rxa
+        g_qxmax = rxb
+        calc_plastic
+        Rthk = g_thick
+        Rnp = g_nplastic
+    endif
+    local c1  = gp.disp.z(gC1)
+    local wl1 = gp.disp.y(gL1)
+    local wr1 = gp.disp.y(gR1)
+    local v1  = -wl1 + wr1
+    local c2  = gp.disp.z(gC2)
+    local wl2 = gp.disp.y(gL2)
+    local wr2 = gp.disp.y(gR2)
+    local v2  = -wl2 + wr2
+    add_mon(string(stp) + ',' + phase + ',' + string(lxa) + ',' + string(lxb) + ',' + string(rxa) + ',' + string(rxb) + ',' + string(fine) + ',' + string(cyc) + ',' + string(zone.mech.ratio) + ',' + string(Lthk) + ',' + string(Lnp) + ',' + string(Rthk) + ',' + string(Rnp) + ',' + string(c1) + ',' + string(wl1) + ',' + string(wr1) + ',' + string(v1) + ',' + string(c2) + ',' + string(wl2) + ',' + string(wr2) + ',' + string(v2) + ',' + string(nlined))
+end
+
+; ===========================================================
+; main loop
+; ===========================================================
+fish define main_excav
+    local xL = TX_MIN
+    local xR = TX_MAX
+    local L_done = 0
+    local R_done = 0
+    local pLa = 0.0
+    local pLb = 0.0
+    local pRa = 0.0
+    local pRb = 0.0
+    local have_prev = 0
+    local nlined = 0
+    local stp = 0
+    local both_done = 0
+    local crossed1 = 0
+    local crossed2 = 0
+    loop while both_done = 0
+        stp = stp + 1
+        local fine = 0
+        local cLa = 0.0
+        local cLb = 0.0
+        if L_done = 0
+            local wL = DX_COARSE
+            if is_fine(xL) = 1
+                wL = DX_FINE
+                fine = 1
+            endif
+            cLa = xL
+            cLb = xL + wL
+            excavate(cLa - 0.5, cLb - 0.5)
+            xL = xL + wL
+            if cLb >= L_STOP
+                L_done = 1
+            endif
+        endif
+        local cRa = 0.0
+        local cRb = 0.0
+        if R_done = 0
+            local wR = DX_COARSE
+            if is_fine(xR) = 1
+                wR = DX_FINE
+                fine = 1
+            endif
+            cRa = xR - wR
+            cRb = xR
+            excavate(cRa + 0.5, cRb + 0.5)
+            xR = xR - wR
+            if cRa <= R_STOP
+                R_done = 1
+            endif
+        endif
+        ; place liner for the previous step's segments
+        if have_prev = 1
+            make_liner(pLa - 0.5, pLb - 0.5)
+            nlined = nlined + 1
+            make_liner(pRa + 0.5, pRb + 0.5)
+            nlined = nlined + 1
+        endif
+        ; monitoring step = excavation face first crosses 2608 or 2896
+        local is_mon = 0
+        if crossed1 = 0
+            if cLb >= MON1
+                crossed1 = 1
+                is_mon = 1
+            endif
+        endif
+        if crossed2 = 0
+            if cRa <= MON2
+                crossed2 = 1
+                is_mon = 1
+            endif
+        endif
+        local rt = RATIO_COARSE
+        if fine = 1
+            rt = RATIO_FINE
+        endif
+        if is_mon = 1
+            ; monitoring step: detailed cycle record [50..1000] then converge
+            local lastc = 0
+            local k
+            loop k (1, 7)
+                local inc = MCR(k) - lastc
+                if inc > 0
+                    command
+                        model cycle [inc]
+                    endcommand
+                endif
+                write_row(stp, 'cycle', cLa, cLb, cRa, cRb, fine, MCR(k), nlined, 0)
+                lastc = MCR(k)
+            endloop
+            local usedm = solve_step(RATIO_FINE)
+            write_row(stp, 'conv', cLa, cLb, cRa, cRb, fine, lastc + usedm, nlined, 1)
+            write_boundary(stp, 'conv', lastc + usedm)
+            io.out('MONITOR step ' + string(stp) + ' L=' + string(cLa) + '-' + string(cLb) + ' R=' + string(cRa) + '-' + string(cRb) + ' cyc=' + string(lastc + usedm))
+        else
+            local used = solve_step(rt)
+            write_row(stp, 'conv', cLa, cLb, cRa, cRb, fine, used, nlined, 1)
+            write_boundary(stp, 'conv', used)
+            io.out('step ' + string(stp) + ' L=' + string(cLa) + '-' + string(cLb) + ' R=' + string(cRa) + '-' + string(cRb) + ' cyc=' + string(used) + ' ratio=' + string(zone.mech.ratio))
+        endif
+        pLa = cLa
+        pLb = cLb
+        pRa = cRa
+        pRb = cRb
+        have_prev = 1
+        if L_done = 1
+            if R_done = 1
+                both_done = 1
+            endif
+        endif
+        if SMOKE_CAP > 0
+            if stp >= SMOKE_CAP
+                exit
+            endif
+        endif
+    endloop
+    io.out('MAIN_EXCAV done, steps=' + string(stp))
+end
+@main_excav
+
+[file.close]
+; flush the buffered monitor table to its own CSV (boundary file
+; is now closed, so this is the only open file)
+fish define flush_monitor
+    local stt = file.open(csv_path, 1, 1)
+    local a = array.create(1)
+    local i
+    loop i (1, g_nmon)
+        a(1) = g_mon(i)
+        stt = file.write(a, 1)
+    endloop
+    stt = file.close
+    io.out('monitor rows written: ' + string(g_nmon))
+end
+@flush_monitor
+model save 'D:/FLAC_AI/3D_far/0603/excav_monitor_final'
+program echo-line '=== EXCAV_MONITOR DONE ==='
+program quit

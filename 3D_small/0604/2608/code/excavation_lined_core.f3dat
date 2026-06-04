@@ -1,0 +1,394 @@
+; ============================================================
+; excavation_lined_core.f3dat
+; Shared submodel staged excavation core.
+; ASCII-only comments for FLAC3D console safety.
+; Wrappers must set:
+;   MODEL_ID, RESTORE_NAME, CSV_PATH, FINAL_SAVE, MONITOR_X,
+;   SMOKE_CAP, USE_LINER.
+; ============================================================
+
+warning off
+; IMPORTANT: model restore is performed by the WRAPPER, BEFORE it sets the
+; run-specific globals (CSV_PATH, FINAL_SAVE, MONITOR_X, USE_LINER, SMOKE_CAP).
+; model restore reloads the saved FISH symbol table and WIPES any globals set
+; before it; setting them after restore is the only way they survive.
+zone gridpoint initialize displacement (0,0,0)
+zone gridpoint initialize velocity (0,0,0)
+
+zone group 'rock' slot 'support' range group 'tunnel' not
+
+[global RATIO_TARGET = 1.0e-5]
+; dual convergence target: fine steps -> 1e-5, coarse steps -> 1e-4
+[global RATIO_FINE = 1.0e-5]
+[global RATIO_COARSE = 1.0e-4]
+[global SCHUNK = 500]
+[global SOLVE_CAP = 20000]
+[global MIN_CYCLES = 2000]
+[global MAX_RING = 15.0]
+[global Z_LINER_BOT = 215.0]
+[global Z_LINER_TOP = 221.0]
+[global CHECKPOINT_INTERVAL = 10]
+[global LINER_E = 23.5e9]
+[global LINER_NU = 0.2]
+[global LINER_THICK = 0.2]
+[global LINER_DENSITY = 2400]
+[global LINER_KN = 1.0e10]
+[global LINER_KS = 1.0e10]
+[global LINER_COH_SHEAR = 1.0e20]
+
+[global MCR = array.create(7)]
+fish define set_mcr
+    MCR(1) = 50
+    MCR(2) = 100
+    MCR(3) = 200
+    MCR(4) = 300
+    MCR(5) = 400
+    MCR(6) = 500
+    MCR(7) = 1000
+end
+@set_mcr
+
+[global TX_MIN = 1.0e30]
+[global TX_MAX = -1.0e30]
+[global DX_STEP = 1.0]
+[global XMARGIN = 0.51]
+fish define find_tunnel_range
+    loop foreach local z zone.list
+        if zone.group(z,'default') = 'tunnel'
+            local xx = zone.pos.x(z)
+            if xx < TX_MIN
+                TX_MIN = xx
+            endif
+            if xx > TX_MAX
+                TX_MAX = xx
+            endif
+        endif
+    endloop
+
+    local best = 1.0e30
+    loop foreach local z2 zone.list
+        if zone.group(z2,'default') = 'tunnel'
+            local dx = zone.pos.x(z2) - TX_MIN
+            if dx > 1.0e-6
+                if dx < best
+                    best = dx
+                endif
+            endif
+        endif
+    endloop
+    if best < 1.0e29
+        DX_STEP = best
+        XMARGIN = 0.51 * best
+    endif
+    io.out('tunnel x range: ' + string(TX_MIN) + ' ~ ' + string(TX_MAX))
+    io.out('detected DX_STEP: ' + string(DX_STEP) + ', XMARGIN: ' + string(XMARGIN))
+end
+@find_tunnel_range
+
+[global gC = gp.near(MONITOR_X, 4800.0, 220.0)]
+[global gL = gp.near(MONITOR_X, 4797.0, 217.0)]
+[global gR = gp.near(MONITOR_X, 4803.0, 217.0)]
+
+fish define report_monitors
+    io.out('monitor crown gp=' + string(gp.id(gC)) + ' pos=' + string(gp.pos.x(gC)) + ',' + string(gp.pos.y(gC)) + ',' + string(gp.pos.z(gC)))
+    io.out('monitor wall_L gp=' + string(gp.id(gL)) + ' pos=' + string(gp.pos.x(gL)) + ',' + string(gp.pos.y(gL)) + ',' + string(gp.pos.z(gL)))
+    io.out('monitor wall_R gp=' + string(gp.id(gR)) + ' pos=' + string(gp.pos.x(gR)) + ',' + string(gp.pos.y(gR)) + ',' + string(gp.pos.z(gR)))
+end
+@report_monitors
+
+history interval 50
+model history mechanical ratio-average
+model history mechanical unbalanced-maximum
+zone history displacement-z position ([gp.pos.x(gC)] [gp.pos.y(gC)] [gp.pos.z(gC)])
+zone history displacement-y position ([gp.pos.x(gL)] [gp.pos.y(gL)] [gp.pos.z(gL)])
+zone history displacement-y position ([gp.pos.x(gR)] [gp.pos.y(gR)] [gp.pos.z(gR)])
+
+[global g_lid = 0]
+fish define make_liner(xa, xb)
+    g_lid = g_lid + 1
+    command
+        zone face group 'wallnow' slot 'liner' internal range group 'rock' group 'excavation' position-x [xa] [xb] position-z [Z_LINER_BOT] [Z_LINER_TOP]
+        struct liner create by-face id [g_lid] range group 'wallnow' slot 'liner'
+        struct liner property isotropic=([LINER_E], [LINER_NU]) thickness=[LINER_THICK] density=[LINER_DENSITY] range id [g_lid]
+        struct liner property coupling-stiffness-normal=[LINER_KN] coupling-stiffness-shear=[LINER_KS] coupling-cohesion-shear=[LINER_COH_SHEAR] range id [g_lid]
+        zone face group 'lined' slot 'liner' internal range group 'rock' group 'excavation' position-x [xa] [xb] position-z [Z_LINER_BOT] [Z_LINER_TOP]
+    endcommand
+end
+
+fish define excavate_slice(xa, xb)
+    command
+        zone group 'excavation' range group 'tunnel' position-x [xa] [xb]
+        zone cmodel assign null range group 'excavation'
+    endcommand
+end
+
+fish define solve_step(rtarget)
+    local total = 0
+    solve_step = 0
+    loop while total < SOLVE_CAP
+        command
+            model cycle [SCHUNK]
+        endcommand
+        total = total + SCHUNK
+        if total >= MIN_CYCLES
+            if zone.mech.ratio <= rtarget
+                solve_step = total
+                exit
+            endif
+        endif
+    endloop
+    if solve_step = 0
+        solve_step = total
+    endif
+end
+
+[global g_marker = 0]
+[global g_qxmin = 0.0]
+[global g_qxmax = 0.0]
+[global g_thick = 0.0]
+[global g_nplastic = 0]
+[global g_ncontour = 0]
+fish define calc_plastic
+    local qmin = g_qxmin - XMARGIN
+    local qmax = g_qxmax + XMARGIN
+    g_marker = g_marker + 1
+    local marker = g_marker
+    local pbits = 1023
+
+    loop foreach local z zone.list
+        local xz = zone.pos.x(z)
+        if xz >= qmin
+            if xz <= qmax
+                local igp
+                loop igp (1,8)
+                    local g = zone.gp(z, igp)
+                    if zone.model(z) = 'null'
+                        if zone.group(z,'default') = 'excavation'
+                            gp.extra(g,21) = marker
+                        endif
+                    else
+                        if zone.group(z,'default') # 'tunnel'
+                            if zone.group(z,'default') # 'excavation'
+                                gp.extra(g,22) = marker
+                            endif
+                        endif
+                    endif
+                end_loop
+            endif
+        endif
+    endloop
+
+    local ncon = 0
+    loop foreach local gc gp.list
+        if gp.extra(gc,21) = marker
+            if gp.extra(gc,22) = marker
+                ncon = ncon + 1
+            endif
+        endif
+    endloop
+    g_ncontour = ncon
+
+    local cy = array.create(ncon + 1)
+    local cz = array.create(ncon + 1)
+    local ic = 0
+    loop foreach local gc2 gp.list
+        if gp.extra(gc2,21) = marker
+            if gp.extra(gc2,22) = marker
+                ic = ic + 1
+                cy(ic) = gp.pos.y(gc2)
+                cz(ic) = gp.pos.z(gc2)
+            endif
+        endif
+    endloop
+
+    local mthick = 0.0
+    local nplas = 0
+    loop foreach local z2 zone.list
+        local xz2 = zone.pos.x(z2)
+        if xz2 >= qmin
+            if xz2 <= qmax
+                if zone.model(z2) # 'null'
+                    if zone.group(z2,'default') # 'tunnel'
+                        if zone.group(z2,'default') # 'excavation'
+                            local st = zone.state(z2,1)
+                            if math.and(st, pbits) # 0
+                                local zy = zone.pos.y(z2)
+                                local zz = zone.pos.z(z2)
+                                local mind = 1.0e30
+                                if ncon > 0
+                                    local ip
+                                    loop ip (1, ncon)
+                                        local dy = zy - cy(ip)
+                                        local dz = zz - cz(ip)
+                                        local d = math.sqrt(dy*dy + dz*dz)
+                                        if d < mind
+                                            mind = d
+                                        endif
+                                    end_loop
+                                endif
+                                if mind <= MAX_RING
+                                    nplas = nplas + 1
+                                    if mind > mthick
+                                        mthick = mind
+                                    endif
+                                endif
+                            endif
+                        endif
+                    endif
+                endif
+            endif
+        endif
+    endloop
+
+    if ncon = 0
+        g_thick = -1.0
+    else
+        g_thick = mthick
+    endif
+    g_nplastic = nplas
+end
+
+[global fmon = file.open(CSV_PATH, 1, 1)]
+fish define write_header
+    local a = array.create(1)
+    a(1) = 'step,phase,cycle,excav_xmin,excav_xmax,ratio_target,ratio_avg,converged,plastic_thick_max_m,plastic_nzone,contour_ngp,crown_gp_id,crown_x,crown_y,crown_z,crown_ux,crown_uy,crown_uz,wallL_gp_id,wallL_x,wallL_y,wallL_z,wallL_ux,wallL_uy,wallL_uz,wallR_gp_id,wallR_x,wallR_y,wallR_z,wallR_ux,wallR_uy,wallR_uz,n_lined'
+    local st = file.write(a, 1)
+end
+@write_header
+
+fish define write_row(stp, phase, cyc, xa, xb, conv_status, doplas, nlined)
+    local pthick = 0.0
+    local pnzone = 0
+    local pngp = 0
+    if doplas = 1
+        g_qxmin = xa
+        g_qxmax = xb
+        calc_plastic
+        pthick = g_thick
+        pnzone = g_nplastic
+        pngp = g_ncontour
+    endif
+    local a = array.create(1)
+    a(1) = string(stp) + ',' + phase + ',' + string(cyc) + ',' + string(xa) + ',' + string(xb) + ',' + string(RATIO_TARGET) + ',' + string(zone.mech.ratio) + ',' + string(conv_status) + ',' + string(pthick) + ',' + string(pnzone) + ',' + string(pngp) + ',' + string(gp.id(gC)) + ',' + string(gp.pos.x(gC)) + ',' + string(gp.pos.y(gC)) + ',' + string(gp.pos.z(gC)) + ',' + string(gp.disp.x(gC)) + ',' + string(gp.disp.y(gC)) + ',' + string(gp.disp.z(gC)) + ',' + string(gp.id(gL)) + ',' + string(gp.pos.x(gL)) + ',' + string(gp.pos.y(gL)) + ',' + string(gp.pos.z(gL)) + ',' + string(gp.disp.x(gL)) + ',' + string(gp.disp.y(gL)) + ',' + string(gp.disp.z(gL)) + ',' + string(gp.id(gR)) + ',' + string(gp.pos.x(gR)) + ',' + string(gp.pos.y(gR)) + ',' + string(gp.pos.z(gR)) + ',' + string(gp.disp.x(gR)) + ',' + string(gp.disp.y(gR)) + ',' + string(gp.disp.z(gR)) + ',' + string(nlined)
+    local st = file.write(a, 1)
+end
+
+; ---- fine/coarse staged-excavation scheme ----
+; Within +/-FINE_HALF of MONITOR_X excavate FINE_DX per step; elsewhere COARSE_DX.
+; Coarse slabs are clipped so they land exactly on the fine-zone boundary (no crossing).
+[global FINE_HALF = 36.0]
+[global FINE_DX = 2.0]
+[global COARSE_DX = 7.0]
+fish define decide_width(edge_in)
+    local fine_lo = MONITOR_X - FINE_HALF
+    local fine_hi = MONITOR_X + FINE_HALF
+    local w = COARSE_DX
+    if edge_in < fine_lo - 0.001
+        w = COARSE_DX
+        if edge_in + w > fine_lo
+            w = fine_lo - edge_in
+        endif
+    else
+        if edge_in < fine_hi - 0.001
+            w = FINE_DX
+            if edge_in + w > fine_hi
+                w = fine_hi - edge_in
+            endif
+        else
+            w = COARSE_DX
+        endif
+    endif
+    decide_width = w
+end
+
+fish define main_excav
+    local x_lo = TX_MIN - 0.5 * DX_STEP
+    local x_hi = TX_MAX + 0.5 * DX_STEP
+    local edge = x_lo
+    local stp = 0
+    local crossed = 0
+    local have_prev = 0
+    local pxa = 0.0
+    local pxb = 0.0
+    local nlined = 0
+    loop while edge < x_hi - 0.001
+        local w = decide_width(edge)
+        if edge + w > x_hi
+            w = x_hi - edge
+        endif
+        stp = stp + 1
+        local xa = edge
+        local xb = edge + w
+        ; pick convergence target by region: fine zone -> RATIO_FINE, else RATIO_COARSE
+        if math.abs(0.5 * (xa + xb) - MONITOR_X) <= FINE_HALF
+            RATIO_TARGET = RATIO_FINE
+        else
+            RATIO_TARGET = RATIO_COARSE
+        endif
+        excavate_slice(xa, xb)
+
+        if have_prev = 1
+            if USE_LINER = 1
+                make_liner(pxa, pxb)
+                nlined = nlined + 1
+            endif
+        endif
+
+        local is_mon = 0
+        if crossed = 0
+            if xb >= MONITOR_X
+                crossed = 1
+                is_mon = 1
+            endif
+        endif
+
+        if is_mon = 1
+            local lastc = 0
+            local k
+            loop k (1, 7)
+                local inc = MCR(k) - lastc
+                if inc > 0
+                    command
+                        model cycle [inc]
+                    endcommand
+                endif
+                write_row(stp, 'cycle', MCR(k), xa, xb, -1, 0, nlined)
+                lastc = MCR(k)
+            endloop
+            local usedm = solve_step(RATIO_TARGET)
+            local convm = 0
+            if zone.mech.ratio <= RATIO_TARGET
+                convm = 1
+            endif
+            write_row(stp, 'conv_1e-5', lastc + usedm, xa, xb, convm, 1, nlined)
+            io.out('MONITOR step=' + string(stp) + ' x=' + string(xa) + '-' + string(xb) + ' cycle=' + string(lastc + usedm) + ' ratio=' + string(zone.mech.ratio))
+        else
+            local used = solve_step(RATIO_TARGET)
+            local conv = 0
+            if zone.mech.ratio <= RATIO_TARGET
+                conv = 1
+            endif
+            write_row(stp, 'conv_1e-5', used, xa, xb, conv, 1, nlined)
+            io.out('step=' + string(stp) + ' x=' + string(xa) + '-' + string(xb) + ' cycle=' + string(used) + ' ratio=' + string(zone.mech.ratio))
+        endif
+
+        pxa = xa
+        pxb = xb
+        have_prev = 1
+        edge = xb
+
+        if SMOKE_CAP > 0
+            if stp >= SMOKE_CAP
+                io.out('SMOKE stop at step=' + string(stp))
+                exit
+            endif
+        endif
+    endloop
+    io.out('main excavation done, steps=' + string(stp))
+end
+@main_excav
+
+[file.close]
+model save [FINAL_SAVE]
+program echo-line '=== SUBMODEL EXCAVATION DONE ==='
+program quit

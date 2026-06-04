@@ -1,0 +1,769 @@
+**********************************************
+* Logging started at 週四 六月 4 14:08:07 2026
+* By flac3d Version 6.00 Release 069
+* 
+* 
+* Job Title: 
+**********************************************
+flac3d>
+flac3d>; ---- restore FIRST (model restore wipes FISH globals set before it) ----
+flac3d>[global RESTORE_NAME = 'D:/FLAC_AI/3D_small/0604/2896/sub_2896_initial_state']
+flac3d>model restore [RESTORE_NAME]
+********************************************
+Save file created by FLAC3D 6.00.69.0
+on 週四 六月 4 03:33:21 2026
+Total Cycles: 0  Super Cycles: 0
+Title: sub_2896 unsupported excavation submodel mesh
+Customer: 
+        : 
+********************************************
+flac3d>
+flac3d>; ---- run-specific globals set AFTER restore so they survive ----
+flac3d>[global MODEL_ID = 'sub_2896']
+flac3d>[global CSV_PATH = 'D:/FLAC_AI/3D_small/0604/2896/out/unsup_excavation_monitor_sub_2896.csv']
+flac3d>[global FINAL_SAVE = 'D:/FLAC_AI/3D_small/0604/2896/sub_2896_unsup_final']
+flac3d>[global MONITOR_X = 2896.0]
+flac3d>[global SMOKE_CAP = 0]
+flac3d>[global USE_LINER = 0]
+flac3d>
+flac3d>call 'D:/FLAC_AI/3D_small/0604/2896/code/excavation_lined_core.f3dat' suppress
+--- displacement modified in 238865 gridpoints.
+--- velocity modified in 238865 gridpoints.
+--- Group rock assigned to 215200 Zones in slot support.
+tunnel x range: 2846.5 ~ 2945.5
+detected DX_STEP: 1, XMARGIN: 0.51
+monitor crown gp=128220 pos=2896,4800,220
+monitor wall_L gp=69034 pos=2896,4797,217
+monitor wall_R gp=121554 pos=2896,4803,217
+--- Created history 1 mechanical ratio-average limit
+--- Created history 2 mechanical unbalanced-maximum limit
+--- Created history 3 Z Displacement at (2896,4800,220)
+--- Created history 4 Y Displacement at (2896,4797,217)
+--- Created history 5 Y Displacement at (2896,4803,217)
+--- Group excavation assigned to 812 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500        500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:08:58
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       1000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:09:46
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       1500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:10:33
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       2000 00:00:00:56       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:11:29
+step=1 x=2846-2853 cycle=2000 ratio=2.37128e-05
+--- Group excavation assigned to 812 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       2500 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:12:20
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       3000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:13:08
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       3500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:13:55
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       4000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:14:43
+step=2 x=2853-2860 cycle=2000 ratio=1.96113e-05
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       4500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:15:32
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       5000 00:00:00:44       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:16:17
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       5500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:17:02
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       6000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:17:48
+step=3 x=2860-2862 cycle=2000 ratio=8.45413e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       6500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:18:34
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       7000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:19:20
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       7500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:20:06
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       8000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:20:53
+step=4 x=2862-2864 cycle=2000 ratio=7.88433e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       8500 00:00:00:50       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:21:45
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       9000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:22:34
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       9500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:23:20
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      10000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:24:08
+step=5 x=2864-2866 cycle=2000 ratio=8.84754e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      10500 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:24:57
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      11000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:25:44
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      11500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:26:31
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      12000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:27:19
+step=6 x=2866-2868 cycle=2000 ratio=9.3846e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      12500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:28:07
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      13000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:28:53
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      13500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:29:41
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      14000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:30:26
+step=7 x=2868-2870 cycle=2000 ratio=9.97733e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      14500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:31:13
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      15000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:31:59
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      15500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:32:44
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      16000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:33:30
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      16500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:34:16
+step=8 x=2870-2872 cycle=2500 ratio=5.94413e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      17000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:35:03
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      17500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:35:48
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      18000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:36:34
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      18500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:37:21
+step=9 x=2872-2874 cycle=2000 ratio=9.97538e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      19000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:38:10
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      19500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:38:57
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      20000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:39:44
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      20500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:40:31
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      21000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:41:18
+step=10 x=2874-2876 cycle=2500 ratio=5.99478e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      21500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:42:06
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      22000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:42:53
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      22500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:43:40
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      23000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:44:27
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      23500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:45:14
+step=11 x=2876-2878 cycle=2500 ratio=5.78561e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      24000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:46:01
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      24500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:46:46
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      25000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:47:34
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      25500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:48:22
+step=12 x=2878-2880 cycle=2000 ratio=9.62488e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      26000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:49:10
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      26500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:49:57
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      27000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:50:45
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      27500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:51:31
+step=13 x=2880-2882 cycle=2000 ratio=9.93833e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      28000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:52:17
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      28500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:53:03
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      29000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:53:48
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      29500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:54:33
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      30000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:55:18
+step=14 x=2882-2884 cycle=2500 ratio=5.86389e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      30500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:56:05
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      31000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:56:50
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      31500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:57:35
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      32000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:58:22
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      32500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:59:09
+step=15 x=2884-2886 cycle=2500 ratio=5.88381e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      33000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 14:59:57
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      33500 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:00:45
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      34000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:01:31
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      34500 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:02:20
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      35000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:03:08
+step=16 x=2886-2888 cycle=2500 ratio=5.57587e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      35500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:03:56
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      36000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:04:44
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      36500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:05:31
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      37000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:06:16
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      37500 00:00:00:44       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:07:01
+step=17 x=2888-2890 cycle=2500 ratio=5.78016e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      38000 00:00:00:44       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:07:47
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      38500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:08:33
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      39000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:09:18
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      39500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:10:04
+step=18 x=2890-2892 cycle=2000 ratio=9.98658e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      40000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:10:51
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      40500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:11:38
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      41000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:12:25
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      41500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:13:12
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      42000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:13:58
+step=19 x=2892-2894 cycle=2500 ratio=5.66731e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+       50      42050 00:00:00:04        50                        
+--- Global cycle limit of 50 met.
+--- Cycling ended at: 2026-06-04 15:14:03
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+       50      42100 00:00:00:04        50                        
+--- Global cycle limit of 50 met.
+--- Cycling ended at: 2026-06-04 15:14:08
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      100      42200 00:00:00:09       100                        
+--- Global cycle limit of 100 met.
+--- Cycling ended at: 2026-06-04 15:14:17
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      100      42300 00:00:00:09       100                        
+--- Global cycle limit of 100 met.
+--- Cycling ended at: 2026-06-04 15:14:26
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      100      42400 00:00:00:09       100                        
+--- Global cycle limit of 100 met.
+--- Cycling ended at: 2026-06-04 15:14:36
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      100      42500 00:00:00:09       100                        
+--- Global cycle limit of 100 met.
+--- Cycling ended at: 2026-06-04 15:14:45
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      43000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:15:30
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      43500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:16:15
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      44000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:17:00
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      44500 00:00:00:49       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:17:50
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      45000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:18:39
+MONITOR step=20 x=2894-2896 cycle=3000 ratio=3.29007e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      45500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:19:27
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      46000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:20:12
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      46500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:20:58
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      47000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:21:44
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      47500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:22:31
+step=21 x=2896-2898 cycle=2500 ratio=5.35657e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      48000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:23:21
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      48500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:24:07
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      49000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:24:54
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      49500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:25:40
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      50000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:26:26
+step=22 x=2898-2900 cycle=2500 ratio=5.29332e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      50500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:27:13
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      51000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:28:00
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      51500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:28:47
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      52000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:29:34
+step=23 x=2900-2902 cycle=2000 ratio=9.76265e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      52500 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:30:23
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      53000 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:31:12
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      53500 00:00:00:52       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:32:04
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      54000 00:00:00:54       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:32:59
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      54500 00:00:00:53       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:33:53
+step=24 x=2902-2904 cycle=2500 ratio=5.43051e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      55000 00:00:00:47       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:34:41
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      55500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:35:28
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      56000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:36:15
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      56500 00:00:00:51       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:37:06
+step=25 x=2904-2906 cycle=2000 ratio=9.71196e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      57000 00:00:00:55       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:38:02
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      57500 00:00:00:54       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:38:56
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      58000 00:00:00:54       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:39:51
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      58500 00:00:00:48       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:40:39
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      59000 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:41:26
+step=26 x=2906-2908 cycle=2500 ratio=5.12773e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      59500 00:00:00:51       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:42:18
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      60000 00:00:00:56       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:43:14
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      60500 00:00:00:54       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:44:08
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      61000 00:00:00:54       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:45:03
+step=27 x=2908-2910 cycle=2000 ratio=9.75715e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      61500 00:00:00:56       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:46:01
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      62000 00:00:00:56       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:46:58
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      62500 00:00:00:50       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:47:49
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      63000 00:00:00:49       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:48:38
+step=28 x=2910-2912 cycle=2000 ratio=9.5824e-06
+--- Group excavation assigned to 232 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      63500 00:00:00:58       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:49:38
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      64000 00:00:00:57       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:50:35
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500      64500 00:00:00:57       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 15:51:33

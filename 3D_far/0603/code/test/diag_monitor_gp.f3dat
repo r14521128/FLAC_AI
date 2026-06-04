@@ -1,0 +1,38 @@
+; ===========================================================
+; diag_monitor_gp.f3dat (ASCII) - verify the monitoring gridpoints
+; Restore the finished excavation and print, for each of the 6 monitor
+; gridpoints (crown/wallL/wallR at 2608 and 2896): the ACTUAL resolved
+; position (x,y,z) and its displacement (dx,dy,dz). This checks whether
+; the sidewall convergence points really sit on the tunnel wall.
+; tunnel center y=4800 z=217 R=3 -> springline walls y=4797/4803 z=217
+; ===========================================================
+model new
+program log-file 'D:/FLAC_AI/3D_far/0603/out/diag_monitor_gp.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0603/excav_monitor_final'
+
+[global gC1 = gp.near(2608.0, 4800.0, 220.0)]
+[global gL1 = gp.near(2608.0, 4797.0, 217.0)]
+[global gR1 = gp.near(2608.0, 4803.0, 217.0)]
+[global gC2 = gp.near(2896.0, 4800.0, 220.0)]
+[global gL2 = gp.near(2896.0, 4797.0, 217.0)]
+[global gR2 = gp.near(2896.0, 4803.0, 217.0)]
+
+fish define show(tag, g)
+    io.out(tag + '  pos=(' + string(gp.pos.x(g)) + ',' + string(gp.pos.y(g)) + ',' + string(gp.pos.z(g)) + ')  disp=(' + string(gp.disp.x(g)) + ',' + string(gp.disp.y(g)) + ',' + string(gp.disp.z(g)) + ')')
+end
+fish define run_show
+    io.out('=== monitor gridpoints (pos & disp, metres) ===')
+    show('crown2608', gC1)
+    show('wallL2608', gL1)
+    show('wallR2608', gR1)
+    io.out('conv2608 = ' + string(-gp.disp.y(gL1) + gp.disp.y(gR1)))
+    show('crown2896', gC2)
+    show('wallL2896', gL2)
+    show('wallR2896', gR2)
+    io.out('conv2896 = ' + string(-gp.disp.y(gL2) + gp.disp.y(gR2)))
+end
+@run_show
+
+program echo-line '=== DIAG MONITOR GP DONE ==='
+program quit

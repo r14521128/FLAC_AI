@@ -1,0 +1,35 @@
+# Default deny: only commit project-reviewable text/data/report assets.
+*
+!*/
+
+# Allowed by the daily Codex monitor.
+!*.py
+!*.ipyn
+!*.ipynb
+!*.dat
+!*.f3dat
+!*.md
+!*.txt
+!*.csv
+!*.xlsx
+!*.ps1
+!*.log
+!*.png
+!.gitignore
+
+# Always exclude generated/runtime and sensitive local files.
+__pycache__/
+*.pyc
+*.f3sav
+*.sav
+*.f3prj
+*.tmp
+*.bak
+*.zip
+*.7z
+*.rar
+.env
+scripts/mail_config.json
+data/calibration.db
+flac3d/params.json
+flac3d/simulation_done.flag

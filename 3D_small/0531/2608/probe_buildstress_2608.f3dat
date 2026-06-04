@@ -1,0 +1,230 @@
+program log-file 'D:/FLAC_AI/3D_small/0531/2608/out/probe_buildstress_2608.log'
+program log on
+; ============================================================
+; read_far_boundary_sub_2608.f3dat
+;  sub_2608 + 
+;
+; 
+;   1) restore  build save (sub_2608_build)
+;   2)  Mohr-Coulomb  initial_state /
+;   3)  dat -> 3D Bucket IDW ->  zone 
+;   4)  CSV -> IDW  gridpoint
+;      ->  gp.disp  gp.extra(1..3) 
+;   5)  (velocity hold) = 
+;   6) save sub_2608_initial_state
+;
+; 
+;   : D:/FLAC_AI/3D_far/0603/far_out/initial_stress_sub_2608.dat
+;         : zid x y z sxx syy szz sxy sxz syz  ()
+;   : D:/FLAC_AI/3D_far/0603/far_out/submodel_boundary_displacement_v4_from_0603.csv
+;          0603 submodel_boundary_displacement.csv + gridpoints join 
+;
+;  (held) + 
+;        stress-based submodel  excavation  restore
+;        zone gridpoint initialize displacement (0,0,0) gp.disp
+;        gp.extra(1..3) 
+; ============================================================
+
+model new
+model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+
+; ============================================================
+; box 
+; ============================================================
+[global box_tag   = 'sub_2608']
+[global box_xmin  = 2558.0]
+[global box_xmax  = 2658.0]
+[global box_ymin  = 4775.0]
+[global box_ymax  = 4825.0]
+[global box_zmin  = 192.0]
+[global box_zmax  = 242.0]
+[global face_tol  = 0.05]
+
+[global stress_file = 'D:/FLAC_AI/3D_far/0603/far_out/initial_stress_sub_2608.dat']
+[global disp_file   = 'D:/FLAC_AI/3D_far/0603/far_out/submodel_boundary_displacement_v4_from_0603.csv']
+
+; ============================================================
+;  Mohr-Coulomb  initial_state.py materials_mc
+; (density[kg/m3], young[Pa], poisson, cohesion[Pa], friction[deg])
+; ============================================================
+zone cmodel assign mohr-coulomb range group 'SS_NK' slot 'lithology'
+zone property density 2565.0 young 1.2e9 poisson 0.29 cohesion 300e3 friction 38 tension 30e3 range group 'SS_NK' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'Interbedded_ST' slot 'lithology'
+zone property density 2520.0 young 0.6e9 poisson 0.32 cohesion 75e3 friction 35 tension 7.5e3 range group 'Interbedded_ST' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'SH_ST' slot 'lithology'
+zone property density 2538.0 young 0.8e9 poisson 0.38 cohesion 100e3 friction 32 tension 10e3 range group 'SH_ST' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'SS_NC' slot 'lithology'
+zone property density 2485.0 young 1.0e9 poisson 0.25 cohesion 200e3 friction 42 tension 20e3 range group 'SS_NC' slot 'lithology'
+
+zone cmodel assign mohr-coulomb range group 'Fault' slot 'lithology'
+zone property density 2490.0 young 0.3e9 poisson 0.30 cohesion 30e3 friction 20 tension 3e3 range group 'Fault' slot 'lithology'
+
+; tunnel  x box 2558~2658 2558~2600 SS_NC, 2600~2658 Fault
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2558 2600
+zone property density 2485.0 young 1.0e9 poisson 0.25 cohesion 200e3 friction 42 tension 20e3 range group 'tunnel' position-x 2558 2600
+
+zone cmodel assign mohr-coulomb range group 'tunnel' position-x 2600 2658
+zone property density 2490.0 young 0.3e9 poisson 0.30 cohesion 30e3 friction 20 tension 3e3 range group 'tunnel' position-x 2600 2658
+
+model gravity 0 0 -9.81
+program echo-line '=== BEFORE ReadStress ==='
+
+; ============================================================
+;  (: zid x y z sxx syy szz sxy sxz syz)
+; ============================================================
+[global zdata_n = 0]
+
+fish define ReadStress
+    io.out('ReadStress start: ' + stress_file)
+    local fl = array.create(1)
+    local st = file.open(stress_file, 0, 1)
+    if st # 0 then
+        io.out('[WARN] cannot open stress file: ' + stress_file)
+        zdata_n = 0
+        exit
+    endif
+    ; ---- count rows ----
+    st = file.read(fl, 1)          ; header
+    st = file.read(fl, 1)          ; first data line
+    local next_count_report = 5000
+    loop while st = 0
+        zdata_n = zdata_n + 1
+        if zdata_n >= next_count_report then
+            io.out('ReadStress count rows: ' + string(zdata_n))
+            next_count_report = next_count_report + 5000
+        endif
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+    io.out('stress data rows: ' + string(zdata_n))
+
+    global xdat   = array.create(zdata_n)
+    global ydat   = array.create(zdata_n)
+    global zdat   = array.create(zdata_n)
+    global sxxdat = array.create(zdata_n)
+    global syydat = array.create(zdata_n)
+    global szzdat = array.create(zdata_n)
+    global sxydat = array.create(zdata_n)
+    global sxzdat = array.create(zdata_n)
+    global syzdat = array.create(zdata_n)
+
+    st = file.open(stress_file, 0, 1)
+    st = file.read(fl, 1)          ; header
+    local i = 0
+    st = file.read(fl, 1)          ; first data line
+    loop while st = 0
+        i = i + 1
+        local ln = fl(1)
+        xdat(i)   = float(string.token(ln, 2))
+        ydat(i)   = float(string.token(ln, 3))
+        zdat(i)   = float(string.token(ln, 4))
+        sxxdat(i) = float(string.token(ln, 5))
+        syydat(i) = float(string.token(ln, 6))
+        szzdat(i) = float(string.token(ln, 7))
+        sxydat(i) = float(string.token(ln, 8))
+        sxzdat(i) = float(string.token(ln, 9))
+        syzdat(i) = float(string.token(ln, 10))
+        st = file.read(fl, 1)
+    endloop
+    st = file.close
+    io.out('stress data loaded: ' + string(i) + ' rows')
+end
+@ReadStress
+program echo-line '=== AFTER ReadStress ==='
+
+; ============================================================
+; 3D Bucket  sub_2608 box buffer
+; ============================================================
+[global bucket_size = 6.0]
+[global inv_bucket_size = 1.0 / bucket_size]
+[global bucket_x0 = 2550.0]
+[global bucket_y0 = 4770.0]
+[global bucket_z0 = 188.0]
+[global bucket_nx = 20]
+[global bucket_ny = 12]
+[global bucket_nz = 11]
+[global bucket_total = bucket_nx * bucket_ny * bucket_nz]
+
+fish define BucketID
+    BucketID = (bx_id_x - 1) * bucket_ny * bucket_nz + (bx_id_y - 1) * bucket_nz + bx_id_z
+end
+fish define GetBucketX
+    GetBucketX = int((gb_x - bucket_x0) * inv_bucket_size) + 1
+end
+fish define GetBucketY
+    GetBucketY = int((gb_y - bucket_y0) * inv_bucket_size) + 1
+end
+fish define GetBucketZ
+    GetBucketZ = int((gb_z - bucket_z0) * inv_bucket_size) + 1
+end
+fish define ClampBucketX
+    if cb_x < 1 then
+        ClampBucketX = 1
+        exit
+    endif
+    if cb_x > bucket_nx then
+        ClampBucketX = bucket_nx
+        exit
+    endif
+    ClampBucketX = cb_x
+end
+fish define ClampBucketY
+    if cb_y < 1 then
+        ClampBucketY = 1
+        exit
+    endif
+    if cb_y > bucket_ny then
+        ClampBucketY = bucket_ny
+        exit
+    endif
+    ClampBucketY = cb_y
+end
+fish define ClampBucketZ
+    if cb_z < 1 then
+        ClampBucketZ = 1
+        exit
+    endif
+    if cb_z > bucket_nz then
+        ClampBucketZ = bucket_nz
+        exit
+    endif
+    ClampBucketZ = cb_z
+end
+
+fish define BuildStressBuckets
+    if zdata_n = 0 then
+        exit
+    endif
+    global b_head = array.create(bucket_total)
+    global b_next = array.create(zdata_n)
+    loop local ib0 (1, bucket_total)
+        b_head(ib0) = 0
+    endloop
+    loop local ip0 (1, zdata_n)
+        global gb_x = xdat(ip0)
+        global gb_y = ydat(ip0)
+        global gb_z = zdat(ip0)
+        local bx0 = GetBucketX
+        local by0 = GetBucketY
+        local bz0 = GetBucketZ
+        global cb_x = bx0
+        global cb_y = by0
+        global cb_z = bz0
+        bx0 = ClampBucketX
+        by0 = ClampBucketY
+        bz0 = ClampBucketZ
+        global bx_id_x = bx0
+        global bx_id_y = by0
+        global bx_id_z = bz0
+        local bid0 = BucketID
+        b_next(ip0) = b_head(bid0)
+        b_head(bid0) = ip0
+    endloop
+    io.out('stress buckets built: ' + string(bucket_total) + ' buckets')
+end
+@BuildStressBuckets
+program echo-line '=== BUILDSTRESS PROBE DONE ==='
+program quit

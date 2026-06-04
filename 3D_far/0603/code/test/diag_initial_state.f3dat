@@ -1,0 +1,101 @@
+; ===========================================================
+; diag_initial_state.f3dat  (0603, diagnostic, ASCII only)
+; Check health of the 0603 pre-excavation initial state:
+;   per-lithology yield counts (tension vs shear) + stress range.
+; zone.state bits: shear-n=1 shear-p=2 tension-n=4 tension-p=8
+;   tension = and(st,12) != 0 ; shear = and(st,3) != 0
+; ===========================================================
+model new
+program log-file 'D:/FLAC_AI/3D_far/0603/out/diag_initial_state.log'
+program log on
+model restore 'D:/FLAC_AI/3D_far/0603/initial_state_0603'
+
+[global G = array.create(5)]
+[global ig = 0]
+fish define set_names
+    G(1) = 'SS_NK'
+    G(2) = 'Interbedded_ST'
+    G(3) = 'SH_ST'
+    G(4) = 'SS_NC'
+    G(5) = 'Fault'
+end
+@set_names
+
+[global c_tot = array.create(5)]
+[global c_ten = array.create(5)]
+[global c_shr = array.create(5)]
+[global c_any = array.create(5)]
+[global szz_min =  1e30]
+[global szz_max = -1e30]
+[global sxx_min =  1e30]
+
+fish define gidx(nm)
+    gidx = 0
+    local k
+    loop k (1, 5)
+        if nm = G(k)
+            gidx = k
+        endif
+    endloop
+end
+
+fish define run_diag
+    local k
+    loop k (1, 5)
+        c_tot(k) = 0
+        c_ten(k) = 0
+        c_shr(k) = 0
+        c_any(k) = 0
+    endloop
+    loop foreach local z zone.list
+        if zone.model(z) # 'null'
+            local szz = zone.stress.zz(z)
+            local sxx = zone.stress.xx(z)
+            if szz < szz_min
+                szz_min = szz
+            endif
+            if szz > szz_max
+                szz_max = szz
+            endif
+            if sxx < sxx_min
+                sxx_min = sxx
+            endif
+            local gi = gidx(zone.group(z,'lithology'))
+            if gi > 0
+                c_tot(gi) = c_tot(gi) + 1
+                local st = zone.state(z,1)
+                if math.and(st, 12) # 0
+                    c_ten(gi) = c_ten(gi) + 1
+                endif
+                if math.and(st, 3) # 0
+                    c_shr(gi) = c_shr(gi) + 1
+                endif
+                if math.and(st, 15) # 0
+                    c_any(gi) = c_any(gi) + 1
+                endif
+            endif
+        endif
+    endloop
+    io.out('=== 0603 initial-state yield by lithology ===')
+    io.out('group            total    tension(%)     shear(%)      any(%)')
+    loop k (1, 5)
+        local tt = c_tot(k)
+        local pt = 0.0
+        local ps = 0.0
+        local pa = 0.0
+        if tt > 0
+            pt = 100.0 * c_ten(k) / tt
+            ps = 100.0 * c_shr(k) / tt
+            pa = 100.0 * c_any(k) / tt
+        endif
+        io.out(G(k) + '   tot=' + string(tt) + '  ten=' + string(c_ten(k)) + '(' + string(pt) + '%)  shr=' + string(c_shr(k)) + '(' + string(ps) + '%)  any=' + string(c_any(k)) + '(' + string(pa) + '%)')
+    endloop
+    io.out('=== stress sanity (Pa) ===')
+    io.out('szz_min(most compressive) = ' + string(szz_min))
+    io.out('szz_max(least/ tensile?)  = ' + string(szz_max))
+    io.out('sxx_min(most compressive) = ' + string(sxx_min))
+end
+@run_diag
+
+program echo-line '=== DIAG DONE ==='
+program quit

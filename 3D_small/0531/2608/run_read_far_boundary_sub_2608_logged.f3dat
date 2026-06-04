@@ -1,0 +1,6 @@
+program log-file 'D:/FLAC_AI/3D_small/0531/2608/out/read_far_boundary_sub_2608_wrapper.log'
+program log on
+program echo-line '=== RUN read_far_boundary_sub_2608 ==='
+call 'D:/FLAC_AI/3D_small/0531/2608/read_far_boundary_sub_2608.f3dat' suppress
+program echo-line '=== WRAPPER DONE ==='
+program quit

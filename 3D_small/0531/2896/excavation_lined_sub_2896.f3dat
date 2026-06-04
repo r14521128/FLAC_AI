@@ -1,0 +1,23 @@
+; ============================================================
+; excavation_lined_sub_2896.f3dat
+; Wrapper for sub_2896 staged excavation using the shared FISH core.
+; ASCII-only comments for FLAC3D console safety.
+; ============================================================
+
+model new
+program log-file 'D:/FLAC_AI/3D_small/0531/2896/out/excavation_lined_sub_2896.log'
+program log on
+
+; ---- restore FIRST (model restore wipes FISH globals set before it) ----
+[global RESTORE_NAME = 'D:/FLAC_AI/3D_small/0531/2896/sub_2896_initial_state']
+model restore [RESTORE_NAME]
+
+; ---- run-specific globals set AFTER restore so they survive ----
+[global MODEL_ID = 'sub_2896']
+[global CSV_PATH = 'D:/FLAC_AI/3D_small/0531/2896/out/lined_excavation_monitor_sub_2896.csv']
+[global FINAL_SAVE = 'D:/FLAC_AI/3D_small/0531/2896/out/sub_2896_lined_final']
+[global MONITOR_X = 2896.0]
+[global SMOKE_CAP = 0]
+[global USE_LINER = 1]
+
+call 'D:/FLAC_AI/3D_small/0531/excavation_lined_core.f3dat' suppress

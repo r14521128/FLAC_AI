@@ -1,0 +1,2187 @@
+**********************************************
+* Logging started at 週四 六月 4 08:43:43 2026
+* By flac3d Version 6.00 Release 069
+* 
+* 
+* Job Title: 
+**********************************************
+flac3d>
+flac3d>; ---- restore FIRST (model restore wipes FISH globals set before it) ----
+flac3d>[global RESTORE_NAME = 'D:/FLAC_AI/3D_small/0531/2896/sub_2896_initial_state']
+flac3d>model restore [RESTORE_NAME]
+********************************************
+Save file created by FLAC3D 6.00.69.0
+on 週四 六月 4 03:33:21 2026
+Total Cycles: 0  Super Cycles: 0
+Title: sub_2896 unsupported excavation submodel mesh
+Customer: 
+        : 
+********************************************
+flac3d>
+flac3d>; ---- run-specific globals set AFTER restore so they survive ----
+flac3d>[global MODEL_ID = 'sub_2896']
+flac3d>[global CSV_PATH = 'D:/FLAC_AI/3D_small/0531/2896/out/smoke_lined_monitor_sub_2896.csv']
+flac3d>[global FINAL_SAVE = 'D:/FLAC_AI/3D_small/0531/2896/out/sub_2896_lined_smoke']
+flac3d>[global MONITOR_X = 2896.0]
+flac3d>[global SMOKE_CAP = 4]
+flac3d>[global USE_LINER = 1]
+flac3d>
+flac3d>call 'D:/FLAC_AI/3D_small/0531/excavation_lined_core.f3dat' suppress
+--- displacement modified in 238865 gridpoints.
+--- velocity modified in 238865 gridpoints.
+--- Group rock assigned to 215200 Zones in slot support.
+tunnel x range: 2846.5 ~ 2945.5
+detected DX_STEP: 1, XMARGIN: 0.51
+monitor crown gp=128220 pos=2896,4800,220
+monitor wall_L gp=69034 pos=2896,4797,217
+monitor wall_R gp=121554 pos=2896,4803,217
+--- Created history 1 mechanical ratio-average limit
+--- Created history 2 mechanical unbalanced-maximum limit
+--- Created history 3 Z Displacement at (2896,4800,220)
+--- Created history 4 Y Displacement at (2896,4797,217)
+--- Created history 5 Y Displacement at (2896,4803,217)
+--- Group excavation assigned to 116 Zones in slot Default.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500        500 00:00:00:46       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:44:33
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       1000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:45:19
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       1500 00:00:00:44       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:46:04
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       2000 00:00:00:44       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:46:49
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       2500 00:00:00:44       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:47:33
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       3000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:48:18
+step=1 x=2845.99-2847.01 cycle=3000 ratio=6.57688e-06
+--- Group excavation assigned to 116 Zones in slot Default.
+--- Group wallnow added to 32 faces in slot liner.
+--- 64 elements, 66 nodes, and 66 links created.
+--- Property isotropic set to 2.35e+10,0.2 in 64 liner elements.
+--- Property thickness set to 0.2 in 64 liner elements.
+--- Property density set to 2400 in 64 liner elements.
+--- Property coupling-stiffness-normal set to 1e+10 in 64 liner elements.
+--- Property coupling-stiffness-shear set to 1e+10 in 64 liner elements.
+--- Property coupling-cohesion-shear set to 1e+20 in 64 liner elements.
+--- Group lined added to 32 faces in slot liner.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       3500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:49:06
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       4000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:49:52
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       4500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:50:37
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       5000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:51:22
+step=2 x=2846.99-2848.01 cycle=2000 ratio=1.405e-06
+--- Group excavation assigned to 116 Zones in slot Default.
+--- Group wallnow added to 32 faces in slot liner.
+--- 64 elements, 66 nodes, and 66 links created.
+--- Property isotropic set to 2.35e+10,0.2 in 64 liner elements.
+--- Property thickness set to 0.2 in 64 liner elements.
+--- Property density set to 2400 in 64 liner elements.
+--- Property coupling-stiffness-normal set to 1e+10 in 64 liner elements.
+--- Property coupling-stiffness-shear set to 1e+10 in 64 liner elements.
+--- Property coupling-cohesion-shear set to 1e+20 in 64 liner elements.
+--- Group lined added to 32 faces in slot liner.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       5500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:52:11
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       6000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:52:56
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       6500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:53:41
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       7000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:54:26
+step=3 x=2847.99-2849.01 cycle=2000 ratio=4.4036e-07
+--- Group excavation assigned to 116 Zones in slot Default.
+--- Group wallnow added to 32 faces in slot liner.
+--- 64 elements, 66 nodes, and 66 links created.
+--- Property isotropic set to 2.35e+10,0.2 in 64 liner elements.
+--- Property thickness set to 0.2 in 64 liner elements.
+--- Property density set to 2400 in 64 liner elements.
+--- Property coupling-stiffness-normal set to 1e+10 in 64 liner elements.
+--- Property coupling-stiffness-shear set to 1e+10 in 64 liner elements.
+--- Property coupling-cohesion-shear set to 1e+20 in 64 liner elements.
+--- Group lined added to 32 faces in slot liner.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       7500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:55:15
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       8000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:56:00
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       8500 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:56:45
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
++++ axial dir. of cables and piles or normal dir. of liners and geogrids
+    at shared node out of alignment by more than 30 degrees.
+    Cycle      Total       Clock
+--------- ---------- ----------- 
+      500       9000 00:00:00:45       500                        
+--- Global cycle limit of 500 met.
+--- Cycling ended at: 2026-06-04 08:57:31
+step=4 x=2848.99-2850.01 cycle=2000 ratio=3.1022e-07
+SMOKE stop at step=4
+0 (integer)
+--- Model saved to file D:/FLAC_AI/3D_small/0531/2896/out/sub_2896_lined_smoke.f3sav.
+=== SUBMODEL EXCAVATION DONE === 

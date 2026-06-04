@@ -1,0 +1,8 @@
+program log-file 'D:/FLAC_AI/3D_small/0531/2608/out/probe_restore_gravity_2608.log'
+program log on
+model new
+model restore 'D:/FLAC_AI/3D_small/0531/2608/sub_2608_build'
+program echo-line '=== AFTER RESTORE ==='
+model gravity 0 0 -9.81
+program echo-line '=== AFTER GRAVITY ==='
+program quit

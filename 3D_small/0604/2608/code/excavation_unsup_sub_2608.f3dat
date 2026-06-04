@@ -1,0 +1,26 @@
+; ============================================================
+; excavation_unsup_sub_2608.f3dat  (0604 layout, fine/coarse + dual ratio)
+; sub_2608 staged excavation, UNSUPPORTED (no liner).
+; ASCII-only comments for FLAC3D console safety.
+;   code   -> 0604/2608/code
+;   out    -> 0604/2608/out  (CSV + log)
+;   f3sav  -> 0531/2608      (next to the initial-stress restore file)
+; ============================================================
+
+model new
+program log-file 'D:/FLAC_AI/3D_small/0604/2608/out/excavation_unsup_sub_2608.log'
+program log on
+
+; ---- restore FIRST (model restore wipes FISH globals set before it) ----
+[global RESTORE_NAME = 'D:/FLAC_AI/3D_small/0604/2608/sub_2608_initial_state']
+model restore [RESTORE_NAME]
+
+; ---- run-specific globals set AFTER restore so they survive ----
+[global MODEL_ID = 'sub_2608']
+[global CSV_PATH = 'D:/FLAC_AI/3D_small/0604/2608/out/unsup_excavation_monitor_sub_2608.csv']
+[global FINAL_SAVE = 'D:/FLAC_AI/3D_small/0604/2608/sub_2608_unsup_final']
+[global MONITOR_X = 2608.0]
+[global SMOKE_CAP = 0]
+[global USE_LINER = 0]
+
+call 'D:/FLAC_AI/3D_small/0604/2608/code/excavation_lined_core.f3dat' suppress

@@ -1,0 +1,80 @@
+﻿test_type,sheet,hole_id,depth_mid_m,formation,lithology,raw_unit,model_unit,parameter,value
+RQD,表3-3 透水試驗+RQD,BH-2,14.0,石底層,砂岩,SH with thin SS_(ST),SH_ST,平均RQD(%),0.0
+RQD,表3-3 透水試驗+RQD,BH-3,49.5,石底層,砂頁岩互層,SH with thin SS_(ST),SH_ST,平均RQD(%),43.0
+RQD,表3-3 透水試驗+RQD,BH-4,36.0,石底層,頁岩,Fault_up,Fault_up,平均RQD(%),0.0
+RQD,表3-3 透水試驗+RQD,BH-5,62.5,南莊層,砂岩,SS with thin SH_(NC),SS_NC,平均RQD(%),59.0
+RQD,表3-3 透水試驗+RQD,BH-5,80.5,南莊層,砂岩,SS with thin SH_(NC),SS_NC,平均RQD(%),40.0
+RQD,表3-3 透水試驗+RQD,BH-5,103.0,南莊層,頁岩夾薄砂岩,SH with  SS,SS_NC,平均RQD(%),46.8
+RQD,表3-3 透水試驗+RQD,BH-7,33.5,南莊層,砂岩,SS with thin SH_(NC),SS_NC,平均RQD(%),4.0
+Physical,表3-5 一般物理性質,BH-1,50.1,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,單位重(g/cm³),2.59
+Physical,表3-5 一般物理性質,BH-2,12.15,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,單位重(g/cm³),2.48
+Physical,表3-5 一般物理性質,BH-2,15.25,石底層,灰色砂岩,SH with thin SS_(ST),SH_ST,單位重(g/cm³),2.39
+Physical,表3-5 一般物理性質,BH-3,37.40000000000001,石底層,灰色砂頁岩,SS/SH Interbedded_(ST),Interbedded_ST,單位重(g/cm³),2.52
+Physical,表3-5 一般物理性質,BH-3,49.5,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,單位重(g/cm³),2.57
+Physical,表3-5 一般物理性質,BH-4,70.25,南莊層,灰色砂岩,Fault_down,Fault_down,單位重(g/cm³),2.49
+Physical,表3-5 一般物理性質,BH-4,83.25,南莊層,灰色頁岩,SS with thin SH_(NC),SS_NC_damage,單位重(g/cm³),2.56
+Physical,表3-5 一般物理性質,BH-5,27.4,南莊層,灰色頁岩,SS with thin SH_(NC),SS_NC,單位重(g/cm³),2.59
+Physical,表3-5 一般物理性質,BH-5,59.65000000000001,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單位重(g/cm³),2.61
+Physical,表3-5 一般物理性質,BH-5,97.5,南莊層,灰色頁岩,SH with  SS,SS_NC,單位重(g/cm³),2.42
+Physical,表3-5 一般物理性質,BH-5,98.19999999999999,南莊層,灰色砂岩,SH with  SS,SS_NC,單位重(g/cm³),2.55
+Physical,表3-5 一般物理性質,BH-7,21.75,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單位重(g/cm³),2.57
+Physical,表3-5 一般物理性質,BH-7,43.25,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單位重(g/cm³),2.56
+UCS,表3-6 單軸壓縮,BH-1,45.15,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,單壓強度qu(MPa),0.067689
+UCS,表3-6 單軸壓縮,BH-2,11.25,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,單壓強度qu(MPa),0.135378
+UCS,表3-6 單軸壓縮,BH-2,15.0,石底層,灰色砂岩,SH with thin SS_(ST),SH_ST,單壓強度qu(MPa),0.307053
+UCS,表3-6 單軸壓縮,BH-3,31.25,石底層,灰色頁岩,SS/SH Interbedded_(ST),Interbedded_ST,單壓強度qu(MPa),0.111834
+UCS,表3-6 單軸壓縮,BH-3,39.65,石底層,灰色砂岩,SS/SH Interbedded_(ST),Interbedded_ST,單壓強度qu(MPa),0.195219
+UCS,表3-6 單軸壓縮,BH-4,21.15,石底層,灰色頁岩,Fault_up,Fault_up,單壓強度qu(MPa),0.439488
+UCS,表3-6 單軸壓縮,BH-4,64.35,南莊層,灰色砂岩,Fault_down,Fault_down,單壓強度qu(MPa),56.0151
+UCS,表3-6 單軸壓縮,BH-4,82.19999999999999,南莊層,灰色砂頁岩,SS with thin SH_(NC),SS_NC_damage,單壓強度qu(MPa),1.61865
+UCS,表3-6 單軸壓縮,BH-5,27.4,南莊層,灰色頁岩,SS with thin SH_(NC),SS_NC,單壓強度qu(MPa),18.9333
+UCS,表3-6 單軸壓縮,BH-5,36.8,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單壓強度qu(MPa),13.8321
+UCS,表3-6 單軸壓縮,BH-5,74.15,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單壓強度qu(MPa),53.4645
+UCS,表3-6 單軸壓縮,BH-7,36.59999999999999,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單壓強度qu(MPa),21.9744
+UCS,表3-6 單軸壓縮,BH-7,39.8,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,單壓強度qu(MPa),1.19682
+Direct shear,表3-7 弱面直剪,BH-3,37.40000000000001,石底層,灰色砂頁岩,SS/SH Interbedded_(ST),Interbedded_ST,Cr(MPa),0.144207
+Direct shear,表3-7 弱面直剪,BH-3,37.40000000000001,石底層,灰色砂頁岩,SS/SH Interbedded_(ST),Interbedded_ST,φr(°),22.3
+Direct shear,表3-7 弱面直剪,BH-3,49.15,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,Cr(MPa),0.0110853
+Direct shear,表3-7 弱面直剪,BH-3,49.15,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,φr(°),15.1
+Direct shear,表3-7 弱面直剪,BH-4,23.85,石底層,灰色砂頁岩,Fault_up,Fault_up,Cr(MPa),0.031392
+Direct shear,表3-7 弱面直剪,BH-4,23.85,石底層,灰色砂頁岩,Fault_up,Fault_up,φr(°),18.3
+Direct shear,表3-7 弱面直剪,BH-4,67.4,南莊層,灰色砂岩,Fault_down,Fault_down,Cr(MPa),0.0222687
+Direct shear,表3-7 弱面直剪,BH-4,67.4,南莊層,灰色砂岩,Fault_down,Fault_down,φr(°),15.8
+Direct shear,表3-7 弱面直剪,BH-4,83.25,南莊層,灰色頁岩,SS with thin SH_(NC),SS_NC_damage,Cr(MPa),0.0885843
+Direct shear,表3-7 弱面直剪,BH-4,83.25,南莊層,灰色頁岩,SS with thin SH_(NC),SS_NC_damage,φr(°),24.3
+Direct shear,表3-7 弱面直剪,BH-5,59.65000000000001,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,Cr(MPa),0.16677
+Direct shear,表3-7 弱面直剪,BH-5,59.65000000000001,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,φr(°),35.6
+Direct shear,表3-7 弱面直剪,BH-5,98.19999999999999,南莊層,灰色砂岩,SH with  SS,SS_NC,Cr(MPa),0.213858
+Direct shear,表3-7 弱面直剪,BH-5,98.19999999999999,南莊層,灰色砂岩,SH with  SS,SS_NC,φr(°),30.9
+Direct shear,表3-7 弱面直剪,BH-5,108.7,南莊層,灰色砂岩,SS with thin SH_(NC).1,SS_NC,Cr(MPa),0.07161300000000001
+Direct shear,表3-7 弱面直剪,BH-5,108.7,南莊層,灰色砂岩,SS with thin SH_(NC).1,SS_NC,φr(°),17.7
+Direct shear,表3-7 弱面直剪,BH-7,19.5,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,Cr(MPa),0.254079
+Direct shear,表3-7 弱面直剪,BH-7,19.5,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,φr(°),37.2
+Direct shear,表3-7 弱面直剪,BH-7,35.3,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,Cr(MPa),0.063765
+Direct shear,表3-7 弱面直剪,BH-7,35.3,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,φr(°),22.5
+Triaxial summary,表3-8 三軸壓縮,BH-3,49.5,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,Cp(MPa),0.307053
+Triaxial summary,表3-8 三軸壓縮,BH-3,49.5,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,φp(°),53.15
+Triaxial summary,表3-8 三軸壓縮,BH-3,49.5,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,Cr(MPa),0.206991
+Triaxial summary,表3-8 三軸壓縮,BH-3,49.5,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,φr(°),45.71
+Triaxial summary,表3-8 三軸壓縮,BH-4,87.7,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC_damage,Cp(MPa),1.243908
+Triaxial summary,表3-8 三軸壓縮,BH-4,87.7,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC_damage,φp(°),77.81
+Triaxial summary,表3-8 三軸壓縮,BH-4,87.7,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC_damage,Cr(MPa),0.45126
+Triaxial summary,表3-8 三軸壓縮,BH-4,87.7,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC_damage,φr(°),47.49
+Triaxial summary,表3-8 三軸壓縮,BH-5,96.75,南莊層,灰色頁岩,SH with  SS,SS_NC,Cp(MPa),0.377685
+Triaxial summary,表3-8 三軸壓縮,BH-5,96.75,南莊層,灰色頁岩,SH with  SS,SS_NC,φp(°),49.21
+Triaxial summary,表3-8 三軸壓縮,BH-5,96.75,南莊層,灰色頁岩,SH with  SS,SS_NC,Cr(MPa),0.203067
+Triaxial summary,表3-8 三軸壓縮,BH-5,96.75,南莊層,灰色頁岩,SH with  SS,SS_NC,φr(°),30.57
+Elastic,表3-9 靜動彈性試驗,BH-1,55.6,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,E靜(MPa),2964.6801
+Elastic,表3-9 靜動彈性試驗,BH-1,55.6,石底層,灰色頁岩,SH with thin SS_(ST),SH_ST,ν靜(-),0.38
+Elastic,表3-9 靜動彈性試驗,BH-2,15.25,石底層,灰色砂岩,SH with thin SS_(ST),SH_ST,E靜(MPa),461.3643
+Elastic,表3-9 靜動彈性試驗,BH-2,15.25,石底層,灰色砂岩,SH with thin SS_(ST),SH_ST,ν靜(-),0.38
+Elastic,表3-9 靜動彈性試驗,BH-3,47.775,石底層,灰色砂頁岩,SH with thin SS_(ST),SH_ST,E靜(MPa),1619.4348
+Elastic,表3-9 靜動彈性試驗,BH-3,47.775,石底層,灰色砂頁岩,SH with thin SS_(ST),SH_ST,ν靜(-),0.4
+Elastic,表3-9 靜動彈性試驗,BH-4,92.425,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC_damage,E靜(MPa),3215.8161
+Elastic,表3-9 靜動彈性試驗,BH-4,92.425,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC_damage,ν靜(-),0.23
+Elastic,表3-9 靜動彈性試驗,BH-5,97.5,南莊層,灰色砂頁岩,SH with  SS,SS_NC,E靜(MPa),2099.9286
+Elastic,表3-9 靜動彈性試驗,BH-5,97.5,南莊層,灰色砂頁岩,SH with  SS,SS_NC,ν靜(-),0.21
+Elastic,表3-9 靜動彈性試驗,BH-5,105.8,南莊層,灰色砂岩,SS with thin SH_(NC).1,SS_NC,E靜(MPa),4323.168900000001
+Elastic,表3-9 靜動彈性試驗,BH-5,105.8,南莊層,灰色砂岩,SS with thin SH_(NC).1,SS_NC,ν靜(-),0.15
+Elastic,表3-9 靜動彈性試驗,BH-7,40.9,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,E靜(MPa),504.0378000000001
+Elastic,表3-9 靜動彈性試驗,BH-7,40.9,南莊層,灰色砂岩,SS with thin SH_(NC),SS_NC,ν靜(-),0.29
