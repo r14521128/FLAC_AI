@@ -39,3 +39,4 @@ flac3d/simulation_done.flag
 
 # Local generated summaries for low-token Codex automation.
 output/codex_monitor/
+scripts/codex_repeort/
